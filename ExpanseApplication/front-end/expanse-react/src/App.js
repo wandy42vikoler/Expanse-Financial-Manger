@@ -2,10 +2,7 @@ import React, {useState, Component} from 'react';
 import axios from 'axios';
 import './App.css'
 import Chart from './Chart'
-
-
-
-
+import DoughnutChart from './DoughnutChart'
 
 
 
@@ -28,8 +25,14 @@ function App() {
     <div className="App">
       <h1>Message</h1>
       <h1 className="backend">{message}</h1>
+      <div>
       <Chart />
+      </div>
+      <div>
+      <DoughnutChart />
+      </div>
     </div>
+
   );
 }
 
