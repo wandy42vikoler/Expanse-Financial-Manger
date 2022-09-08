@@ -8,7 +8,7 @@ class DoughnutChart extends Component {
 		const options = {
 			animationEnabled: true,
 			title: {
-				text: "Customer Satisfaction"
+				text: "Activity"
 			},
 			subtitles: [{
 				text: "71% Positive",
@@ -22,11 +22,11 @@ class DoughnutChart extends Component {
 				indexLabel: "{name}: {y}",
 				yValueFormatString: "#,###'%'",
 				dataPoints: [
-					{ name: "Unsatisfied", y: 5 },
-					{ name: "Very Unsatisfied", y: 31 },
-					{ name: "Very Satisfied", y: 40 },
-					{ name: "Satisfied", y: 17 },
-					{ name: "Neutral", y: 7 }
+					{ name: "Education", y: 5 },
+					{ name: "Freetime", y: 31 },
+					{ name: "House", y: 40 },
+					{ name: "Car", y: 17 },
+					{ name: "Food", y: 7 }
 				]
 			}]
 		}

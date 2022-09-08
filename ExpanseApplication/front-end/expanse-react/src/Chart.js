@@ -26,7 +26,7 @@ class Chart extends Component {
 			theme: "light2",
 			animationEnabled: true,
 			title:{
-				text: "Units Sold VS Profit"
+				text: "Income / Expenses"
 			},
 			subtitles: [{
 				text: "Click Legend to Hide or Unhide Data Series"
@@ -35,14 +35,14 @@ class Chart extends Component {
 				title: "States"
 			},
 			axisY: {
-				title: "Units Sold",
+				title: "Income",
 				titleFontColor: "#6D78AD",
 				lineColor: "#6D78AD",
 				labelFontColor: "#6D78AD",
 				tickColor: "#6D78AD"
 			},
 			axisY2: {
-				title: "Profit in USD",
+				title: "Expenses",
 				titleFontColor: "#51CDA0",
 				lineColor: "#51CDA0",
 				labelFontColor: "#51CDA0",
@@ -57,7 +57,7 @@ class Chart extends Component {
 			},
 			data: [{
 				type: "spline",
-				name: "Units Sold",
+				name: "Income",
 				showInLegend: true,
 				xValueFormatString: "MMM YYYY",
 				yValueFormatString: "#,##0 Units",
@@ -78,7 +78,7 @@ class Chart extends Component {
 			},
 			{
 				type: "spline",
-				name: "Profit",
+				name: "Expenses",
 				axisYType: "secondary",
 				showInLegend: true,
 				xValueFormatString: "MMM YYYY",
