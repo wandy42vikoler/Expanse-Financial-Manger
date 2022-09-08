@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, Component} from 'react';
 import axios from 'axios';
 import './App.css'
 import TotalBalanceComponent from './components/totalBalance';
@@ -9,6 +9,8 @@ import TransactionsTable from './components/Transactions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
+import Chart from './Chart'
+import DoughnutChart from './DoughnutChart'
 
 
 
@@ -23,12 +25,7 @@ function App() {
     console.log('resp', response);
     console.log(response.data);
     setMessage(response.data)
-    console.log("test", response.data);
   })
-
-
-
-  console.log(message, "hhoho");
       
 
   return (
@@ -47,6 +44,15 @@ function App() {
       <TotalIncomeComponent />
       <TotalSavingComponent />
       <TransactionsTable />
+      </div>
+    <div className="App">
+      <h1>Message</h1>
+      <h1 className="backend">{message}</h1>
+      <div>
+      <Chart />
+      </div>
+      <div>
+      <DoughnutChart />
       </div>
     </div>
   );
