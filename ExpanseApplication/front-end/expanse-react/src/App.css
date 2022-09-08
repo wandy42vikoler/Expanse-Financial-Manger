@@ -1,4 +1,12 @@
-.backend {
-  color: red;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+.data_box {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 298.8px;
+  height: 120.69px;
+  left: 335.5px;
+  top: 298.94px;
+
+  border: 0.5px solid #000000;
+  border-radius: 10px;
 }
