@@ -1,7 +1,6 @@
 /* App.js */
 import React, { Component } from 'react';
 import CanvasJSReact from './canvasjs-3.6.7/canvasjs.react.js';
-var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 class DoughnutChart extends Component {
 	render() {
@@ -33,9 +32,8 @@ class DoughnutChart extends Component {
 		return (
 		<div>
 			<CanvasJSChart options = {options}
-				/* onRef={ref => this.chart = ref} */
+				onRef={ref => this.chart = ref}
 			/>
-			{/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
 		</div>
 		);
 	}
