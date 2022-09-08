@@ -1,6 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, Component} from 'react';
 import axios from 'axios';
 import './App.css'
+import Chart from './Chart'
+
+
 
 
 
@@ -20,10 +23,12 @@ function App() {
   })
       
 
+
   return (
     <div className="App">
       <h1>Message</h1>
-      <h1 class="backend">{message}</h1>
+      <h1 className="backend">{message}</h1>
+      <Chart />
     </div>
   );
 }
