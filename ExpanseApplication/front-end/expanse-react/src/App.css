@@ -1,12 +1,143 @@
-.data_box {
+.main {
+  position: absolute;
+  width: 1512px;
+  height: 982px;
+}
+
+.logo {
+  position: absolute;
+  width: 66.53px;
+  height: 49.38px;
+  left: 21.17px;
+  top: 13.17px;
+  font-family: 'Futura';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 43px;
+
+  color: #000000;
+
+}
+
+.greeting{
+  position: absolute;
+  width: 298.18px;
+  height: 72.13px;
+  left: 106.5px;
+  top: 32.79px;
+
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+
+  color: #000000;
+}
+
+.user_name {
+  position: absolute;
+width: 151.2px;
+height: 24.69px;
+left: 1147.6px;
+top: 46.22px;
+
+font-family: 'Helvetica';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 18px;
+
+color: #000000;
+}
+
+.card_component_totBalance {
   box-sizing: border-box;
 
   position: absolute;
-  width: 298.8px;
-  height: 120.69px;
-  left: 335.5px;
-  top: 298.94px;
+  width: 301.2px;
+  height: 137.71px;
+  left: 106.5px;
+  top: 157.38px;
 
   border: 0.5px solid #000000;
   border-radius: 10px;
+}
+
+.card_component_totIncome {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 301.2px;
+  height: 137.71px;
+  left: 449.86px;
+  top: 157.38px;
+
+  border: 0.5px solid #000000;
+  border-radius: 10px;
+}
+
+.card_component_totExpenses {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 301.2px;
+  height: 137.71px;
+  left: 793.23px;
+  top: 157.38px;
+
+  border: 0.5px solid #000000;
+  border-radius: 10px;
+}
+
+
+.card_component_Savings {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 301.2px;
+  height: 137.71px;
+  left: 1136.59px;
+  top: 157.38px;
+
+  border: 0.5px solid #000000;
+  border-radius: 10px;
+}
+
+
+.transaction_card {
+  box-sizing: border-box;
+  position: absolute;
+  width: 542.15px;
+  height: 304.93px;
+  left: 106.5px;
+  top: 347.55px;
+
+  border: 0.5px solid #000000;
+  border-radius: 10px;
+}
+
+.card_icon{
+  float: right;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+.card_content{
+  line-height: 150px;
+  height: 150px;
+}
+
+.card_body{
+  margin-top: 40px;
+  margin-left: 20px;
+}
+
+.card_data{
+  margin-top: 30px;
+}
+
+.transactions_table {
+  margin-top: 30px;
 }

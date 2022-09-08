@@ -2,6 +2,10 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import './App.css'
 import TotalBalanceComponent from './components/totalBalance';
+import TotalExpenseComponent from './components/TotalExpense';
+import TotalIncomeComponent from './components/TotalIncome';
+import TotalSavingComponent from './components/TotalSavings';
+import TransactionsTable from './components/Transactions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -28,11 +32,21 @@ function App() {
       
 
   return (
-    <div className="App">
-      <h1>Message</h1>
-      <h1 className="backend">{message}</h1>
+    <div>
+      <div className='logo'>
+        e.
+      </div>
+      <div className='greeting'>
+        <p>Hello Name, <br></br>
+        Welcome back!
+        </p>
+      </div>
       <div className='data_box'>
       <TotalBalanceComponent />
+      <TotalExpenseComponent />
+      <TotalIncomeComponent />
+      <TotalSavingComponent />
+      <TransactionsTable />
       </div>
     </div>
   );
