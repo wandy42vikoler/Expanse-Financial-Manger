@@ -22,8 +22,7 @@ function App() {
 
   const [message, setMessage] = useState("Nie Wok");
 
-  
-  axios.put('http://localhost:8080/message').then(response => {
+  axios.put('http://localhost:8080/message').then(response => {   //include useEffect for fetching to not ending in a loop
     console.log('resp', response);
     console.log(response.data);
     setMessage(response.data)
