@@ -6,6 +6,10 @@ import TotalExpenseComponent from './components/TotalExpense';
 import TotalIncomeComponent from './components/TotalIncome';
 import TotalSavingComponent from './components/TotalSavings';
 import TransactionsTable from './components/Transactions';
+import ActivityComponent from './components/categoryExpensePie';
+import LeaderboardComponent from './components/leaderboard';
+import ChartsComponent from './components/charts';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -16,7 +20,7 @@ function App() {
 
   axios.defaults.baseURL = 'localhost:8080';
 
-  const [message, setMessage] = useState("Hoooi");
+  const [message, setMessage] = useState("Nie Wok");
 
   
   axios.put('http://localhost:8080/message').then(response => {
@@ -27,8 +31,6 @@ function App() {
   })
 
 
-
-  console.log(message, "hhoho");
       
 
   return (
@@ -37,16 +39,19 @@ function App() {
         e.
       </div>
       <div className='greeting'>
-        <p>Hello Name, <br></br>
+        <p>Hello {message}, <br></br>
         Welcome back!
         </p>
       </div>
       <div className='data_box'>
-      <TotalBalanceComponent />
-      <TotalExpenseComponent />
-      <TotalIncomeComponent />
-      <TotalSavingComponent />
-      <TransactionsTable />
+        <TotalBalanceComponent />
+        <TotalExpenseComponent />
+        <TotalIncomeComponent />
+        <TotalSavingComponent />
+        <TransactionsTable />
+        <ActivityComponent />
+        <LeaderboardComponent/>
+        <ChartsComponent/>
       </div>
     </div>
   );
