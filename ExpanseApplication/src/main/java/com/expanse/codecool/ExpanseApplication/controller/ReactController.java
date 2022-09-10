@@ -16,8 +16,7 @@ public class ReactController {
 
     @CrossOrigin
     @RequestMapping(value="/message", method=PUT)
-    public List<String> reactTesting(){
-        List<String> test = List.of("hi", "hey", "ho");
-        return test;
+    public String reactTesting(){
+        return "Sien Tofrond";
     }
 }
