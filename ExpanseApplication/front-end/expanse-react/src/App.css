@@ -98,7 +98,7 @@ color: #000000;
   position: absolute;
   width: 301.2px;
   height: 137.71px;
-  left: 1136.59px;
+  left: 1126.59px;
   top: 157.38px;
 
   border: 0.5px solid #000000;
@@ -141,3 +141,48 @@ color: #000000;
 .transactions_table {
   margin-top: 30px;
 }
+
+.card_component_activity {
+  box-sizing: border-box;
+  position: absolute;
+  width: 382.52px;
+  height: 304.93px;
+  left: 746px;
+  top: 347.55px;
+  border: 0.5px solid #000000;
+  border-radius: 10px;
+}
+
+.card_title_activity{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.leaderboard_card{
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 259.03px;
+  height: 304.93px;
+  left: 1168.76px;
+  top: 347.55px;
+
+  border: 0.5px solid #000000;
+  border-radius: 10px;
+}
+
+.charts_card {
+  box-sizing: border-box;
+  position: absolute;
+  width: 551px;
+  height: 256px;
+  left: 97px;
+  top: 705px;
+}
+
+.profile_avatar{
+  position: absolute;
+  left: 1298px;
+  top: 26px;
+}
+  
