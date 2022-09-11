@@ -3,12 +3,8 @@ package com.expanse.codecool.ExpanseApplication.entity;
 
 import com.expanse.codecool.ExpanseApplication.entity.type.TransactionType;
 import lombok.*;
-import org.hibernate.Hibernate;
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Objects;
 
 
 @Entity
