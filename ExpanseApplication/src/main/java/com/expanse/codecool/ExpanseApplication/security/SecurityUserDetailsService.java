@@ -10,8 +10,12 @@ import com.expanse.codecool.ExpanseApplication.security.UserRepository;
 
 @Service
 public class SecurityUserDetailsService implements UserDetailsService {
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
+
+    public SecurityUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username)

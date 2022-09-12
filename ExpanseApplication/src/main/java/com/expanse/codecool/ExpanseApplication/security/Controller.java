@@ -8,17 +8,19 @@ import org.springframework.http.MediaType;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.expanse.codecool.ExpanseApplication.security.User;
-import com.expanse.codecool.ExpanseApplication.security.SecurityUserDetailsService;
-@Controller
-public class HelloController {
-    @Autowired private SecurityUserDetailsService userDetailsManager;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
+@org.springframework.stereotype.Controller
+public class Controller {
+    private final SecurityUserDetailsService userDetailsManager;
+    private final PasswordEncoder passwordEncoder;
+
+    public Controller(SecurityUserDetailsService userDetailsManager, PasswordEncoder passwordEncoder) {
+        this.userDetailsManager = userDetailsManager;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @GetMapping("/")
     public String index() {
@@ -27,7 +29,7 @@ public class HelloController {
     @GetMapping("/login")
     public String login(HttpServletRequest request, HttpSession session) {
         session.setAttribute(
-                "error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION")
+                "error", getErrorMessage(request)
         );
         return "login";
     }
@@ -45,8 +47,8 @@ public class HelloController {
         user.setPassword(passwordEncoder.encode(body.get("password")));
         user.setAccountNonLocked(true); userDetailsManager.createUser(user);
     }
-    private String getErrorMessage(HttpServletRequest request, String key) {
-        Exception exception = (Exception) request.getSession().getAttribute(key);
+    private String getErrorMessage(HttpServletRequest request) {
+        Exception exception = (Exception) request.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
         String error = "";
         if (exception instanceof BadCredentialsException) {
             error = "Invalid username and password!";

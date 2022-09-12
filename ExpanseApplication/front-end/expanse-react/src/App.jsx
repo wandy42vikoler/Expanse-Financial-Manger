@@ -9,10 +9,9 @@ import TransactionsTable from './components/Transactions';
 import ActivityComponent from './components/categoryExpensePie';
 import LeaderboardComponent from './components/leaderboard';
 import ChartsComponent from './components/charts';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
+import Login from './Security/Login'
+import Register from './Security/Register';
 
 
 
@@ -28,29 +27,17 @@ function App() {
     setMessage(response.data)
     console.log("test", response.data);
   })
-
-
-      
+    
 
   return (
     <div>
-      <div className='logo'>
-        e.
-      </div>
-      <div className='greeting'>
-        <p>Hello {message}, <br></br>
-        Welcome back!
-        </p>
-      </div>
       <div className='data_box'>
-        <TotalBalanceComponent />
-        <TotalExpenseComponent />
-        <TotalIncomeComponent />
-        <TotalSavingComponent />
-        <TransactionsTable />
-        <ActivityComponent />
-        <LeaderboardComponent/>
-        <ChartsComponent/>
+        <Login />
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <Register />
       </div>
     </div>
   );
