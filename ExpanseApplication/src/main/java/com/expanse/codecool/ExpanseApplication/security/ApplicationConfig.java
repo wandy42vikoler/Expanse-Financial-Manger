@@ -6,16 +6,18 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
 @Configuration
-public class ApplicationConfig extends WebSecurityConfigurerAdapter {
+public class ApplicationConfig{
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+                http.csrf()
+                .disable()
                 .authorizeRequests().antMatchers("/register**")
                 .permitAll() .anyRequest().authenticated()
                 .and()
@@ -24,5 +26,6 @@ public class ApplicationConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout() .invalidateHttpSession(true)
                 .clearAuthentication(true) .permitAll();
+        return http.build();
     }
 }
