@@ -3,7 +3,7 @@ import { Chart } from 'primereact/chart';
 
 const BarChart = () => {
     const [basicData] = useState({
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
         datasets: [
             {
                 label: 'Income',
@@ -57,10 +57,11 @@ const BarChart = () => {
     const { basicOptions} = getLightTheme();
 
     return (
-        <div className='card card_title_activity'>
-            <h5>Analytics</h5>
-            <Chart type="bar" data={basicData} options={basicOptions} style={{ position: 'relative', height: '280px' }}/>
-        </div>
+        
+            <div>
+            <Chart type="bar" data={basicData} options={basicOptions} style={{ position: 'relative', height: '250px', width: '530px', display: 'block', boxSizing: 'border-box'}}/>
+            </div>
+       
     )
 }
 

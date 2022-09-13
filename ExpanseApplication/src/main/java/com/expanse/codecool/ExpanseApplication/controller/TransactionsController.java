@@ -1,16 +1,14 @@
 package com.expanse.codecool.ExpanseApplication.controller;
 
 
+import com.expanse.codecool.ExpanseApplication.entity.Categories;
 import com.expanse.codecool.ExpanseApplication.entity.Transaction;
 import com.expanse.codecool.ExpanseApplication.entity.type.TransactionType;
+import com.expanse.codecool.ExpanseApplication.service.CategoriesService;
 import com.expanse.codecool.ExpanseApplication.service.TransactionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -18,10 +16,12 @@ import java.util.List;
 public class TransactionsController {
 
     private final TransactionService transactionService;
+    private final CategoriesService categoriesService;
 
 
-    public TransactionsController(TransactionService transactionService) {
+    public TransactionsController(TransactionService transactionService, CategoriesService categoriesService) {
         this.transactionService = transactionService;
+        this.categoriesService = categoriesService;
     }
 
     @CrossOrigin
@@ -34,20 +34,25 @@ public class TransactionsController {
     @PutMapping(value="/addexpense")
     @ResponseBody
     public void addExpense(@RequestParam String title, String category, Long amount) throws Exception {
-        System.out.println(amount);
         LocalDate date = LocalDate.now();
-        System.out.println(category);
         Transaction transaction = new Transaction(title, category, date, amount, TransactionType.EXPENSE);
         transactionService.saveTransaction(transaction);
+        if(!categoriesService.checkForDuplicate(category)){
+            Categories newCategory = new Categories(category, amount);
+            categoriesService.save(newCategory);
+        }
+        else{
+            Categories categoryToUpdate = categoriesService.getCategory(category);
+            long newAmount = categoryToUpdate.getAmount() + amount;
+            categoriesService.updateCategoryAmount(newAmount, category);
+        }
     }
 
 
     @CrossOrigin
     @PutMapping(value="/addincome")
     public void addIncome(@RequestParam String title, String category, Long amount){
-        System.out.println(amount);
         LocalDate date = LocalDate.now();
-        System.out.println(category);
         Transaction transaction = new Transaction(title, category, date, amount, TransactionType.INCOME);
         transactionService.saveTransaction(transaction);
     }
