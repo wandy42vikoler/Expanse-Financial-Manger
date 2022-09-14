@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 
 const BarChart = () => {
+
+    
+
+
     const [basicData] = useState({
         labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
         datasets: [

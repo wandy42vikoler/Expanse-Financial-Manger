@@ -1,7 +1,29 @@
 import "../App.css";
+import React, {useState, useEffect} from "react";
+import axios from 'axios';
  
 
-function totalExpenseComponent() {
+function TotalExpense() {
+
+
+    axios.defaults.baseURL = 'http://localhost:8080';
+  
+    const [totalExpense, setTotalExpense] = useState(0);
+
+    useEffect(() => {
+        axios.get('/transaction/expensesvalue')
+            .then(response => { 
+                console.log(response)
+                setTotalExpense(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    },)
+
+    let amountFormatter = Intl.NumberFormat('de-DE', { 
+        style: 'currency', 
+        currency: 'EUR' })
 
     return (
 
@@ -12,11 +34,11 @@ function totalExpenseComponent() {
             <div className="card_body">
                 <h5 className="card_title">Total Expense</h5>
                 <p className="card_data">
-                Expense Amount
+                {amountFormatter.format(totalExpense)}
                 </p>
             </div>
         </div>
     );
 }
 
-export default totalExpenseComponent;
+export default TotalExpense;

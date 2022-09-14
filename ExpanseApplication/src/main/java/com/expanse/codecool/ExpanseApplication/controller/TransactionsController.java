@@ -56,4 +56,33 @@ public class TransactionsController {
         Transaction transaction = new Transaction(title, category, date, amount, TransactionType.INCOME);
         transactionService.saveTransaction(transaction);
     }
+
+
+    @CrossOrigin
+    @GetMapping(value="/incomes")
+    public List<Transaction> transactionIncomes(){
+        return transactionService.fetchIncomes();
+    }
+
+    @CrossOrigin
+    @GetMapping(value="/expenses")
+    public List<Transaction> transactionExpenses(){
+        return transactionService.fetchExpenses();
+    }
+
+    @CrossOrigin
+    @GetMapping(value="/expensesvalue")
+    public Long transactionExpensesValue(){
+        return transactionService.sumExpenses();
+    }
+
+    @CrossOrigin
+    @GetMapping(value="/incomesvalue")
+    public Long transactionIncomesValue(){
+        return transactionService.sumIncomes();
+    }
+
+
+
+
 }
