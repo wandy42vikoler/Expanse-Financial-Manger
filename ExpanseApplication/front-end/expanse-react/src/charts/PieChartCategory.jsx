@@ -5,50 +5,81 @@ import { Chart } from 'primereact/chart';
 
 const DoughnutChart = () => {
 
+    const [chartData, setChartData] = useState([]);
 
-    axios.defaults.baseURL = 'http://localhost:8080';
-  
-    const [categories, setCategories] = useState([]);
+
 
     useEffect(() => {
-        axios.get('/categories')
+
+        axios.defaults.baseURL = 'http://localhost:8080';
+
+        /*axios.get('/categories')
             .then(response => { 
-                console.log(response)
-                setCategories(response.data)
+                console.log('Response', response)
+                categories.map(item =>
+                    categories.push(item.name)
+                )
             })
             .catch(error => {
                 console.log(error)
             })
-    })
 
-    const categoryTitle = categories.map(title => (
-        title.name
-    ));
-    let categoryAmounts = categories.map(title => (
-        title.amount
-    ));
+            console.log('cat', categories)*/
 
-    const [chartData] = useState({
-        labels: categoryTitle,
-        datasets: [
-            {
-                data: categoryAmounts,
-                backgroundColor: [
-                    "#FF6384",
-                    "#36A2EB",
-                    "#FFCE56"
-                ],
-                hoverBackgroundColor: [
-                    "#FF6384",
-                    "#36A2EB",
-                    "#FFCE56"
-                ]
-            }]
-    });
 
-    console.log('type of data', chartData);
+            async function getCategories(){
+                try{
+                    return await axios.get('/categories')
+                    .then(response => {
+                        response.data.map(title => {
+                            categoryTitle.push(title.name)
+                            categoryAmounts.push(title.amount)
+                            return null;
+                        }
+                    )})
+                }
+                catch(err){
+                    console.log(err)
+                }
+            }
 
-    const [lightOptions] = useState({
+            getCategories()
+
+            const categoryTitle = [];
+
+
+                
+        
+            const categoryAmounts = [];
+            
+         
+
+            console.log('Amounts', categoryAmounts)
+
+
+
+        const dataForChart = {
+            labels: categoryTitle,
+            datasets: [
+                {
+                    data: categoryAmounts,
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56"
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56"
+                    ]
+                }]
+        };
+        setChartData(dataForChart)
+    },[])
+
+
+    const lightOptions = {
         plugins: {
             legend: {
                 labels: {
@@ -56,7 +87,7 @@ const DoughnutChart = () => {
                 }
             }
         }
-    });
+    };
 
     return (
         

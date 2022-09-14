@@ -2,6 +2,9 @@ import "../App.css";
 import React, {useState, useEffect} from "react";
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
+import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
  
 
 function TransactionsComponent() {
@@ -19,7 +22,7 @@ function TransactionsComponent() {
             .catch(error => {
                 console.log(error)
             })
-    })
+    }, [])
 
     let amountFormatter = Intl.NumberFormat('de-DE', { 
         style: 'currency', 
@@ -28,7 +31,12 @@ function TransactionsComponent() {
 
 
     return (
-        <div className="transaction_card">
+        <div className="transaction_card" style={{overflow: 'scroll'}}>
+            <Box sx={{ '& > :not(style)': { m: 1 } }}>
+                <Fab size="small" color="primary" aria-label="add" style={{float: 'right'}}>
+                    <AddIcon/>
+                </Fab>
+            </Box>
             <h5 className="card_title_activity">Transactions</h5>
             <Table className="transactions_table">
                 <thead>
@@ -50,7 +58,7 @@ function TransactionsComponent() {
                 ))}
                 </tbody>
             </Table>
-        </div>
+            </div>
     );
 }
 
