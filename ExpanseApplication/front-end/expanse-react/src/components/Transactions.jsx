@@ -5,6 +5,9 @@ import axios from 'axios';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+//import Modal from '@mui/material/Modal';
+//import TextField from '@mui/material/TextField';
+
  
 
 function TransactionsComponent() {
@@ -12,6 +15,9 @@ function TransactionsComponent() {
     axios.defaults.baseURL = 'http://localhost:8080';
   
     const [transactions, setTransactions] = useState([]);
+    /*const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);*/
 
     useEffect(() => {
         axios.get('/transaction')
@@ -27,6 +33,20 @@ function TransactionsComponent() {
     let amountFormatter = Intl.NumberFormat('de-DE', { 
         style: 'currency', 
         currency: 'EUR' })
+
+
+        const style = {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 800,
+            height: 100,
+            bgcolor: 'background.paper',
+            boxShadow: '0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 5px 0 rgba(0, 0, 0, 0.09)',
+            p: 4,
+            borderRadius: '20px'
+          };
 
 
 
@@ -58,7 +78,7 @@ function TransactionsComponent() {
                 ))}
                 </tbody>
             </Table>
-            </div>
+        </div>
     );
 }
 
