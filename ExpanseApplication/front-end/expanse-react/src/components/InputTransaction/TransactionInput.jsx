@@ -6,15 +6,12 @@ import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-//import SelectCategories from "./selectCategory";
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
-/*import Box from '@mui/material/Box';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
-import TextField from '@mui/material/TextField';
-*/
+import FormControl from '@mui/material/FormControl';
+import Grid from '@mui/material/Grid';
+import { width } from "@mui/system";
  
 
 function TransactionsInputForm() {
@@ -36,10 +33,10 @@ function TransactionsInputForm() {
 
     getCategories()
 
-    const [title, setTitle] = useState("Title");
+    const [title, setTitle] = useState('');
     const [category, setCategory] = useState("");
     const [type, setType] = useState("");
-    const [amount, setAmount] = useState(0);
+    const [amount, setAmount] = useState(null);
 
     const categoryTitle = [];
 
@@ -65,37 +62,57 @@ function TransactionsInputForm() {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-            <InputLabel id="title">Title</InputLabel>
-            <TextField id="title" required value={title} onChange={(e) => setTitle(e.target.value)}/>
-            <Autocomplete 
+            <form onSubmit={handleSubmit} style={{marginTop: '10px'}}>
+            <Grid container
+            spacing={1}>
+            <Grid item xs>
+            <FormControl>
+            <TextField 
+            label="Title"
+            id="title" required value={title} 
+            onChange={(e) => setTitle(e.target.value)} />
+            </FormControl>
+            </Grid>
+            <Grid item xs>
+            <FormControl>
+            <Autocomplete
                 value={category}
                 onChange={(e, newValue) => { setCategory(newValue); }}
                 id="category"
                 options={categoryTitle}
-                sx={{ width: 300 }}
                 inputValue={category} 
                 onInputChange={(event, newInputValue) => {
                     setCategory(newInputValue);
                   }}
-                renderInput={(params) => <TextField {...params}/>}
-                label="Category"
+                renderInput={(params) => <TextField label="Category" {...params}/>}
                 />
-            <InputLabel id="type">Income/Expense</InputLabel>
-            <Select name="type"value={type} onChange={(e) => setType(e.target.value)}>
-            <MenuItem select value="Expense">Expense</MenuItem>
+            </FormControl>
+            </Grid>
+            <Grid item xs>
+            <FormControl>
+            <InputLabel id="type">Type</InputLabel>
+            <Select id="type" label="Type" placeholder="Expense" value={type} onChange={(e) => setType(e.target.value)} fullWidth>
+            <MenuItem value="Expense">Expense</MenuItem>
             <MenuItem value="Income">Income</MenuItem>
             </Select>
+            </FormControl>
+            </Grid>
+            <Grid item xs>
+            <FormControl>
             <InputLabel id="amount">Amount</InputLabel>
             <OutlinedInput
                 id="amount"
+                label="amount"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 startAdornment={<InputAdornment position="start">€</InputAdornment>}
             />
-            <Button type="submit "variant="contained" color="success">
+            </FormControl>
+            </Grid>
+            <Button type="submit "variant="contained" color="success" style={{marginLeft: '10px'}}>
                 Add
             </Button> 
+            </Grid>
             </form>
         </div>
     )

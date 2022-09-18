@@ -1,8 +1,7 @@
 import './index.css'
-/*import React from 'react';
+import React from 'react';
 import Sidebar from './components/Sidebar';
-import HomeDashboard from './Pages/home';*/
-import TransactionInput from './components/InputTransaction/TransactionInput';
+import HomeDashboard from './Pages/home';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,7 +13,8 @@ function App() {
 
   return (
     <>
-      <TransactionInput/>
+      <Sidebar/>
+      <HomeDashboard/>
     </>
   );
 }
