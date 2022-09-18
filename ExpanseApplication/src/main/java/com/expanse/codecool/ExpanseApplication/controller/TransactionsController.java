@@ -4,6 +4,7 @@ package com.expanse.codecool.ExpanseApplication.controller;
 import com.expanse.codecool.ExpanseApplication.entity.Categories;
 import com.expanse.codecool.ExpanseApplication.entity.Transaction;
 import com.expanse.codecool.ExpanseApplication.entity.type.TransactionType;
+import com.expanse.codecool.ExpanseApplication.service.BalanceService;
 import com.expanse.codecool.ExpanseApplication.service.CategoriesService;
 import com.expanse.codecool.ExpanseApplication.service.TransactionService;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +19,13 @@ public class TransactionsController {
     private final TransactionService transactionService;
     private final CategoriesService categoriesService;
 
+    private final BalanceService balanceService;
 
-    public TransactionsController(TransactionService transactionService, CategoriesService categoriesService) {
+
+    public TransactionsController(TransactionService transactionService, CategoriesService categoriesService, BalanceService balanceService) {
         this.transactionService = transactionService;
         this.categoriesService = categoriesService;
+        this.balanceService = balanceService;
     }
 
     @CrossOrigin
@@ -41,11 +45,14 @@ public class TransactionsController {
             Categories newCategory = new Categories(category, amount);
             categoriesService.save(newCategory);
         }
-        else{
+        else {
             Categories categoryToUpdate = categoriesService.getCategory(category);
             long newAmount = categoryToUpdate.getAmount() + amount;
             categoriesService.updateCategoryAmount(newAmount, category);
         }
+        Long amountUpdate = balanceService.getBalance() - amount;
+        System.out.println('b' + amountUpdate);
+        balanceService.updateBalance(amountUpdate);
     }
 
 
@@ -55,6 +62,9 @@ public class TransactionsController {
         LocalDate date = LocalDate.now();
         Transaction transaction = new Transaction(title, category, date, amount, TransactionType.INCOME);
         transactionService.saveTransaction(transaction);
+        Long amountUpdate = balanceService.getBalance() + amount;
+        System.out.println('b' + amountUpdate);
+        balanceService.updateBalance(amountUpdate);
     }
 
 

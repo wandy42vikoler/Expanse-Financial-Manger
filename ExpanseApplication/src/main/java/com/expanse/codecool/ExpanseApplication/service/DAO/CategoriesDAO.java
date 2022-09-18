@@ -1,4 +1,4 @@
-package com.expanse.codecool.ExpanseApplication.service;
+package com.expanse.codecool.ExpanseApplication.service.DAO;
 
 import com.expanse.codecool.ExpanseApplication.entity.Categories;
 

@@ -3,15 +3,14 @@ package com.expanse.codecool.ExpanseApplication.service;
 import com.expanse.codecool.ExpanseApplication.entity.Transaction;
 import com.expanse.codecool.ExpanseApplication.entity.type.TransactionType;
 import com.expanse.codecool.ExpanseApplication.repository.TransactionRepository;
+import com.expanse.codecool.ExpanseApplication.service.DAO.TransactionDAO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
-public class TransactionService implements TransactionDAO{
+public class TransactionService implements TransactionDAO {
 
     private final TransactionRepository transactionRepository;
 

@@ -2,13 +2,14 @@ package com.expanse.codecool.ExpanseApplication.service;
 
 import com.expanse.codecool.ExpanseApplication.entity.Categories;
 import com.expanse.codecool.ExpanseApplication.repository.CategoriesRepository;
+import com.expanse.codecool.ExpanseApplication.service.DAO.CategoriesDAO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 
 @Service
-public class CategoriesService implements CategoriesDAO{
+public class CategoriesService implements CategoriesDAO {
 
 
     private final CategoriesRepository categoriesRepository;
