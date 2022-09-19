@@ -1,7 +1,27 @@
 import "../App.css";
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
  
 
-function totalSavingComponent() {
+function TotalSavingComponent() {
+
+
+    const [saving, setSaving] = useState(0);
+
+    useEffect(()=>{
+        axios.get('/savings')
+        .then(response =>{
+            console.log(response.data)
+            setSaving(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    })
+
+    let amountFormatter = Intl.NumberFormat('de-DE', { 
+        style: 'currency', 
+        currency: 'EUR' })
 
     return (
 
@@ -10,11 +30,11 @@ function totalSavingComponent() {
             <div className="card_body">
                 <h5 className="card_title">Total Saving</h5>
                 <p className="card_data">
-                Saving Amount
+                {amountFormatter.format(saving)}
                 </p>
             </div>
         </div>
     );
 }
 
-export default totalSavingComponent;
+export default TotalSavingComponent;
