@@ -91,8 +91,4 @@ public class TransactionsController {
     public Long transactionIncomesValue(){
         return transactionService.sumIncomes();
     }
-
-
-
-
 }
