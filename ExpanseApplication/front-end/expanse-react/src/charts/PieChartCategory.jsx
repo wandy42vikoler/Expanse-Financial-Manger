@@ -13,23 +13,9 @@ const DoughnutChart = () => {
 
         axios.defaults.baseURL = 'http://localhost:8080';
 
-        /*axios.get('/categories')
-            .then(response => { 
-                console.log('Response', response)
-                categories.map(item =>
-                    categories.push(item.name)
-                )
-            })
-            .catch(error => {
-                console.log(error)
-            })
-
-            console.log('cat', categories)*/
-
-
             async function getCategories(){
                 try{
-                    return await axios.get('/categories')
+                    return await axios.get('/categories/four')
                     .then(response => {
                         response.data.map(title => {
                             categoryTitle.push(title.name)
@@ -66,12 +52,14 @@ const DoughnutChart = () => {
                     backgroundColor: [
                         "#FF6384",
                         "#36A2EB",
-                        "#FFCE56"
+                        "#FFCE56",
+                        "#367E18"
                     ],
                     hoverBackgroundColor: [
                         "#FF6384",
                         "#36A2EB",
-                        "#FFCE56"
+                        "#FFCE56",
+                        "#367E18"
                     ]
                 }]
         };

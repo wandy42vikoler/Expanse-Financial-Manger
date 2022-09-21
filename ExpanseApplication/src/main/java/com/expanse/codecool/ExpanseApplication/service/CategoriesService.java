@@ -6,6 +6,7 @@ import com.expanse.codecool.ExpanseApplication.service.DAO.CategoriesDAO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -44,5 +45,8 @@ public class CategoriesService implements CategoriesDAO {
         categoriesRepository.updateCategoryAmount(amount, name);
     }
 
-
+    @Override
+    public List<Categories> getTopFourCategories() {
+        return categoriesRepository.findTop4ByOrderByAmountDesc();
+    }
 }
