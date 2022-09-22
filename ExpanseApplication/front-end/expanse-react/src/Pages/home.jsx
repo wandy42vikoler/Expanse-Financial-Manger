@@ -8,34 +8,68 @@ import TransactionsTable from '../components/Transactions';
 import ActivityComponent from '../components/categoryExpensePie';
 import LeaderboardComponent from '../components/leaderboard';
 import ChartsComponent from '../components/charts';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
 
 
 function HomeDashboard() {
 
     axios.defaults.baseURL = 'http://localhost:8080';
   
-    const [message, setMessage] = useState("Nie Wok");
+    const [user, setUser] = useState();
     
     useEffect(() =>{
         axios.get('/user')
             .then(response => {
-                setMessage(response.data)
+                setUser(response.data)
             })
             .catch(error =>{
                 console.log(error)
             })
-    })
+    },[])
   
-    document.body.classList.add('body')
-  
-        
+    //document.body.classList.add('body')
+
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+      };
+
+      const handleClose = () => {
+        setOpen(false);
+      };
+
+    function setUsername(){
+      if(user === ""){
+        return <Button onClick={handleClickOpen}> Set your Username! </Button>
+      } else {
+        return <p>{user}!</p>
+      }
+  }
+
+    const handleSubmit = (event) => {
+      event.preventDefault()
+      axios.post(`/user/${user}`)
+    }
   
     return (
       <>
       <div className='greeting'>
         <p>Welcome back,<br></br>
-        {message} !
+        {setUsername()}
         </p>
+      <Dialog open={open} onClose={handleClose} sx={{width: '1500px'}}>
+        <form onSubmit={handleSubmit}>
+        <DialogContent fullWidth maxWidth="xl">
+        <TextField label="New Username" variant="outlined" onChange={(e)=> setUser(e.target.value)}/>
+        <Button onClick={handleClose} type='submit'>Submit</Button>
+        </DialogContent>
+        </form>
+      </Dialog>
       </div>
         <TotalBalanceComponent />
         <TotalBalanceComponent />

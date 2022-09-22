@@ -1,4 +1,4 @@
-import "/Users/wandyvikoler/Desktop/Codecool/ExpanseProject/expanse/ExpanseApplication/front-end/expanse-react/src/index.css";
+import "../../index.css";
 import React, {useState} from "react";
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';

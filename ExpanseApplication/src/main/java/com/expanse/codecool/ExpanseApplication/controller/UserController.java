@@ -23,9 +23,8 @@ public class UserController {
     }
 
     @CrossOrigin
-    @PostMapping(value="{firstname}/{lastname}")
-    public void saveUser(@PathVariable String firstname, String lastname){
+    @PostMapping(value="/{firstname}")
+    public void saveUser(@PathVariable String firstname){
         user.setUserFirstName(firstname);
-        user.setUserLastName(lastname);
     }
 }
