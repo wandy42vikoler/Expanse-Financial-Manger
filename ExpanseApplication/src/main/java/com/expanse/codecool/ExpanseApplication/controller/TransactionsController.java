@@ -18,7 +18,6 @@ public class TransactionsController {
 
     private final TransactionService transactionService;
     private final CategoriesService categoriesService;
-
     private final BalanceService balanceService;
 
 

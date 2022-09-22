@@ -108,7 +108,7 @@ function TransactionsInputForm() {
             />
             </FormControl>
             </Grid>
-            <Button type="submit "variant="contained" color="success" style={{marginLeft: '10px'}}>
+            <Button type="submit" variant="contained" color="success" style={{marginLeft: '10px'}}>
                 Add
             </Button> 
             </Grid>
