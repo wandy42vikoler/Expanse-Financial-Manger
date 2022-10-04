@@ -159,19 +159,27 @@ const Sidebar = () => {
         </Logo>
         <SlickBar clicked={click}>
           <Item onClick={() => setClick(false)}>
+          <a href="/">
             <img src={Home} alt="Home" />
+          </a>
             <Text clicked={click}>Home</Text>
           </Item>
-          <Item onClick={() => setClick(false)}>
-            <img src={Savings} alt="Savings" />
+          <Item onClick={() => setClick(false)}  href="/savings">
+            <a href="/savings">
+              <img src={Savings} alt="Savings" />
+            </a>
             <Text clicked={click}>Savings</Text>
           </Item>
-          <Item onClick={() => setClick(false)}>
-            <img src={Stock} alt="Stock Portfolio" />
+          <Item onClick={() => setClick(false)} href="/portfolio">
+            <a href="/portfolio">
+              <img src={Stock} alt="Stock Portfolio" />
+            </a>
             <Text clicked={click}>Portfolio</Text>
           </Item>
           <Item onClick={() => setClick(false)}>
-            <img src={Leaderboard} alt="Leaderboard" />
+            <a href="/leaderboard">
+              <img src={Leaderboard} alt="Leaderboard" href="/leaderboard"/>
+            </a>
             <Text clicked={click}>Leaderboard</Text>
           </Item>
         </SlickBar>

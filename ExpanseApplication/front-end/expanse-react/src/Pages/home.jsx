@@ -31,7 +31,7 @@ function HomeDashboard() {
             })
     },[])
   
-    //document.body.classList.add('body')
+    document.body.classList.add('body')
 
     const [open, setOpen] = useState(false);
 
@@ -45,7 +45,7 @@ function HomeDashboard() {
 
     function setUsername(){
       if(user === ""){
-        return <Button onClick={handleClickOpen}> Set your Username! </Button>
+        return <Button onClick={handleClickOpen}> Set your username </Button>
       } else {
         return <p>{user}!</p>
       }
@@ -59,9 +59,9 @@ function HomeDashboard() {
     return (
       <>
       <div className='greeting'>
-        <p>Welcome back,<br></br>
+        <h4>Welcome back,<br></br>
         {setUsername()}
-        </p>
+        </h4>
       <Dialog open={open} onClose={handleClose} sx={{width: '1500px'}}>
         <form onSubmit={handleSubmit}>
         <DialogContent fullWidth maxWidth="xl">

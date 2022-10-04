@@ -1,5 +1,5 @@
 import "../App.css";
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 import Box from '@mui/material/Box';
@@ -9,21 +9,28 @@ import TransactionsInputForm from "./InputTransaction/TransactionInput";
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import {appStateContext} from '../store'
 
 
  
 
 function TransactionsComponent() {
 
+    const appState = useContext(appStateContext);
+
+    console.log('appState', appState)
+
     axios.defaults.baseURL = 'http://localhost:8080';
   
-    const [transactions, setTransactions] = useState([]);
 
     useEffect(() => {
         axios.get('/transaction')
             .then(response => { 
-                console.log(response)
-                setTransactions(response.data)
+                appState.setState(prevState => { //anonymous arrow function
+                    prevState.transactions = response.data;
+                    console.log('rp', response.data);
+                    return {...prevState};
+                })
             })
             .catch(error => {
                 console.log(error)
@@ -34,20 +41,6 @@ function TransactionsComponent() {
         style: 'currency', 
         currency: 'EUR' })
 
-
-    /*const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 800,
-        height: 100,
-        bgcolor: 'background.paper',
-        boxShadow: '0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 5px 0 rgba(0, 0, 0, 0.09)',
-        p: 4,
-        borderRadius: '20px'
-    };    CHECK IF NEEDED! */
-
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -57,6 +50,9 @@ function TransactionsComponent() {
       const handleClose = () => {
         setOpen(false);
       };
+
+
+      console.log('appStTRans', appState.transactions)
 
 
 
@@ -79,7 +75,7 @@ function TransactionsComponent() {
                     </tr>
                 </thead>
                 <tbody>
-                {transactions.map(item => (
+                {appState.transactions.map(item => (
                     <tr>
                         <td key={item.transactionId}>{item.title}</td>
                         <td key={item.transactionId}>{item.category}</td>
@@ -92,7 +88,7 @@ function TransactionsComponent() {
             <Dialog open={open} onClose={handleClose} sx={{width: '1500px'}}>
                 <DialogTitle sx={{marginBottom: '5px'}}>Add Transaction: </DialogTitle>
                 <DialogContent fullWidth maxWidth="xl">
-                    <TransactionsInputForm/>   
+                    <TransactionsInputForm onClose={handleClose}/>   
                 </DialogContent>
             </Dialog>
         </div>

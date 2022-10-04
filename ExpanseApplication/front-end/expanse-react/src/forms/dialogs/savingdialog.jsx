@@ -20,12 +20,13 @@ function SavingDialog(){
 
     const handleSubmit = () => {
         if (type === 'Deduct'){
-            axios.post(`/deduct?amount=${amount}`);
+            axios.post(`/savings/deduct?amount=${amount}`);
+            console.log('deduct', amount)
         }
         else{
-            axios.post(`/add?amount=${amount}`);
+            axios.post(`/savings/add?amount=${amount}`);
+            console.log('add', amount)
         }
-        
     }
 
 
@@ -48,8 +49,8 @@ function SavingDialog(){
             <FormControl>
                 <InputLabel id="type">Add/Deduct</InputLabel>
                 <Select id="type" label="Add/Deduct" placeholder="Add/Deduct" value={type} onChange={(e) => setType(e.target.value)} fullWidth>
-                <MenuItem value="Expense">Deduct</MenuItem>
-                <MenuItem value="Income">Add</MenuItem>
+                <MenuItem value="Deduct">Deduct</MenuItem>
+                <MenuItem value="Add">Add</MenuItem>
             </Select>
             </FormControl>
             </Grid>

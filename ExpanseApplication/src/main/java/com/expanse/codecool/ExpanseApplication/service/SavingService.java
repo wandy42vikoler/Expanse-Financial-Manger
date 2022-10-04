@@ -7,6 +7,8 @@ import com.expanse.codecool.ExpanseApplication.service.DAO.BalanceDAO;
 import com.expanse.codecool.ExpanseApplication.service.DAO.SavingDAO;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SavingService implements SavingDAO {
 
@@ -31,5 +33,10 @@ public class SavingService implements SavingDAO {
     @Override
     public Saving save(Saving saving) {
         return savingRepository.save(saving);
+    }
+
+    @Override
+    public List<Saving> getAll() {
+        return savingRepository.findAll();
     }
 }

@@ -11,9 +11,13 @@ import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
 import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
+import { useAppState } from "../../store";
  
 
-function TransactionsInputForm() {
+function TransactionsInputForm({onClose}) { //passing props from parent to child  with object distructoring (assignment)
+
+
+    const appState = useAppState();  //custom Hook !! in /store
 
     async function getCategories(){
         try{
@@ -43,18 +47,31 @@ function TransactionsInputForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        alert(`The name you entered was: ${title + category + type + amount}`);
-        console.log('Cata', category);
+        let urlType;
 
         if (type === 'Income'){
-            //localhost:8080/transaction/addincome?title=CapGemini&category=Salary&amount=4300
-            axios.put(`http://localhost:8080/transaction/addincome?title=${title}&category=${category}&amount=${amount}`)
+            urlType = 'addincome';
         }
         else {
-            axios.put(`http://localhost:8080/transaction/addexpense?title=${title}&category=${category}&amount=${amount}`)
+            urlType = 'addexpense';
         }
-      }
-
+        //localhost:8080/transaction/addincome?title=CapGemini&category=Salary&amount=4300
+        axios.put(`http://localhost:8080/transaction/${urlType}?title=${title}&category=${category}&amount=${amount}`)   //Refactor import duplicate as Hooks!!!
+        .then(response => {
+            axios.get('http://localhost:8080/transaction')
+            .then(response => { 
+                appState.setState(prevState => { //anonymous arrow function
+                    prevState.transactions = response.data;
+                    console.log('rp', response.data);
+                    return {...prevState};
+                })
+                onClose()
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        })
+    }
 
     
 
@@ -108,7 +125,7 @@ function TransactionsInputForm() {
             />
             </FormControl>
             </Grid>
-            <Button type="submit" variant="contained" color="success" style={{marginLeft: '10px'}}>
+            <Button type="submit" variant="contained" color="success" style={{marginLeft: '10px'}} >
                 Add
             </Button> 
             </Grid>

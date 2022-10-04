@@ -1,7 +1,7 @@
 package com.expanse.codecool.ExpanseApplication.entity;
 
+import com.expanse.codecool.ExpanseApplication.repository.SavingRepository;
 import lombok.*;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 

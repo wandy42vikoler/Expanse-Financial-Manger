@@ -28,6 +28,4 @@ public interface CategoriesRepository extends JpaRepository<Categories, Long> {
     void updateCategoryAmount(long amount, String name);
 
     List<Categories> findTop4ByOrderByAmountDesc();
-
-
 }

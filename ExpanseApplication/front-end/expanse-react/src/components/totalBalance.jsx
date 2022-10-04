@@ -21,7 +21,7 @@ function TotalBalanceComponent() {
         .catch(error => {
             console.log(error)
         })
-    })
+    },[balance])
 
     let amountFormatter = Intl.NumberFormat('de-DE', { 
         style: 'currency', 

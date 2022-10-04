@@ -16,8 +16,12 @@ function leaderboardComponent() {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Joe Mooma</td>
+                        <td>Tom Krüse</td>
                         <td>38 %</td>
+                    </tr>
+                    <tr>
+                        <td>Angelika Schön</td>
+                        <td>22 %</td>
                     </tr>
                 </tbody>
             </Table>

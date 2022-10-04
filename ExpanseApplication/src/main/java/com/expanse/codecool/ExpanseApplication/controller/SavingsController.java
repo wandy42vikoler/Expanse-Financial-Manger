@@ -7,6 +7,8 @@ import com.expanse.codecool.ExpanseApplication.service.SavingService;
 import com.expanse.codecool.ExpanseApplication.service.TransactionService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value="/savings")
 public class SavingsController {
@@ -19,10 +21,17 @@ public class SavingsController {
         this.balanceService = balanceService;
     }
 
+
     @CrossOrigin
     @GetMapping
     public Long savingBalance(){
         return savingService.getSavingAmount();
+    }
+
+    @CrossOrigin
+    @GetMapping(value="/getall")
+    public List<Saving> getAll(){
+        return savingService.getAll();
     }
 
     @CrossOrigin

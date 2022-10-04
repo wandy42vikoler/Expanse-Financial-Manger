@@ -3,6 +3,8 @@ package com.expanse.codecool.ExpanseApplication.service.DAO;
 import com.expanse.codecool.ExpanseApplication.entity.Balance;
 import com.expanse.codecool.ExpanseApplication.entity.Saving;
 
+import java.util.List;
+
 public interface SavingDAO {
 
     void updateSaving(Long amount);
@@ -10,6 +12,8 @@ public interface SavingDAO {
     Long getSavingAmount();
 
     Saving save(Saving saving);
+
+    List<Saving> getAll();
 
 
 }
