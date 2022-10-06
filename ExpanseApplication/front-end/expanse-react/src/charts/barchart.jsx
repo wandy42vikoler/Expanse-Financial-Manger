@@ -1,26 +1,74 @@
 import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
+import axios from 'axios';
 
 const BarChart = () => {
 
-    
+    axios.defaults.baseURL = 'http://localhost:8080';
+
+    async function getTransactionExpenses() {
+        try {
+            return await axios.get('/transaction/expenses')
+                .then(response => {
+                    console.log(response.data)
+                    response.data.map(transaction => {
+                        transactionExpense.push(transaction.amount)
+                        transactionDates.push(transaction.date)
+                        return null;
+                    })
+                })
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+
+    async function getTransactionIncomes() {
+        try {
+            return await axios.get('/transaction/incomes')
+                .then(response => {
+                    console.log(response.data)
+                    response.data.map(transaction => {
+                        transactionIncome.push(transaction.amount)
+                        transactionDates.push(transaction.date)
+                        return null;
+                    })
+                })
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+
+    getTransactionExpenses();
+    getTransactionIncomes();
+
+    const transactionIncome = [];
+    const transactionExpense = [];
+    const transactionDates = [];
+
+    const test_amount = transactionExpense[0]
+
+    console.log(test_amount)
+    console.log(transactionIncome, "incomes_TEST")
+    console.log(transactionExpense, "expense_TEST")
 
 
     const [basicData] = useState({
-        labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+        labels: transactionDates,
         datasets: [
             {
                 label: 'Income',
                 backgroundColor: '#42A5F5',
-                data: [1190, 1359, 1280, 1281, 1356, 1355, 1740]
+                data: transactionIncome
             },
             {
                 label: 'Expenses',
                 backgroundColor: '#FFA726',
-                data: [928, 948, 840, 919, 1186, 1227, 990]
+                data: transactionExpense
             }
         ]
-    });
+    }, []);
 
     const getLightTheme = () => {
         let basicOptions = {
@@ -51,22 +99,25 @@ const BarChart = () => {
                     }
                 }
             }
-        };
+        }
 
         return {
             basicOptions,
         }
     }
 
-    const { basicOptions} = getLightTheme();
+
+    const { basicOptions } = getLightTheme();
 
     return (
-        
-            <div>
-            <Chart type="bar" data={basicData} options={basicOptions} style={{ position: 'relative', height: '250px', width: '530px', display: 'block', boxSizing: 'border-box'}}/>
-            </div>
-       
+
+        <div>
+            <Chart type="bar" data={basicData} options={basicOptions} style={{ position: 'relative', height: '250px', width: '530px', display: 'block', boxSizing: 'border-box' }} />
+        </div>
+
     )
 }
+
+
 
 export default BarChart;
