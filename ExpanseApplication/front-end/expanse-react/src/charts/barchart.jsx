@@ -47,9 +47,17 @@ const BarChart = () => {
     const transactionExpense = [];
     const transactionDates = [];
 
-    const test_amount = transactionExpense[0]
+    var totalExpenseOfDay = 0
+    var totaleIncomeOfDay = 0
 
-    console.log(test_amount)
+    for (let amount in transactionExpense) {
+        totalExpenseOfDay = amount + totalExpenseOfDay
+    }
+
+    for (let amount in transactionIncome) {
+        totaleIncomeOfDay = amount + totaleIncomeOfDay
+    }
+
     console.log(transactionIncome, "incomes_TEST")
     console.log(transactionExpense, "expense_TEST")
 
@@ -73,7 +81,7 @@ const BarChart = () => {
     const getLightTheme = () => {
         let basicOptions = {
             maintainAspectRatio: false,
-            aspectRatio: .8,
+            //aspectRatio: .8,
             plugins: {
                 legend: {
                     labels: {
