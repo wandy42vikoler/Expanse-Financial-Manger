@@ -1,6 +1,8 @@
 import "../App.css";
-import React, {useState, useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import axios from 'axios';
+import {appStateContext} from '../store'
+
  
 
 function TotalExpense() {
@@ -8,18 +10,20 @@ function TotalExpense() {
 
     axios.defaults.baseURL = 'http://localhost:8080';
   
-    const [totalExpense, setTotalExpense] = useState(0);
+    const appState = useContext(appStateContext);
 
     useEffect(() => {
         axios.get('/transaction/expensesvalue')
             .then(response => { 
-                console.log(response)
-                setTotalExpense(response.data)
+                appState.setState(prevState => {
+                    prevState.totalExpense = response.data;
+                    return {...prevState}
+                })
             })
             .catch(error => {
                 console.log(error)
             })
-    },)
+    },[])
 
     let amountFormatter = Intl.NumberFormat('de-DE', { 
         style: 'currency', 
@@ -34,7 +38,7 @@ function TotalExpense() {
             <div className="card_body">
                 <h5 className="card_title">Total Expense</h5>
                 <p className="card_data">
-                {amountFormatter.format(totalExpense)}
+                {amountFormatter.format(appState.totalExpense)}
                 </p>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import axios from 'axios';
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 import InputAdornment from '@mui/material/InputAdornment';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
+import { appStateContext } from '../../store';
 
 
 
@@ -17,15 +18,32 @@ function SavingDialog(){
 
     const [amount, setAmount] = useState();
     const [type, setType] = useState();
+    const appState = useContext(appStateContext);
 
     const handleSubmit = () => {
         if (type === 'Deduct'){
-            axios.post(`/savings/deduct?amount=${amount}`);
-            console.log('deduct', amount)
+            axios.post(`/savings/deduct?amount=${amount}`)
+            .then(response => {
+                axios.get('/finances/balance')
+                .then(response => {
+                    appState.setState(prevState =>{
+                        prevState.totalBalance = response.data;
+                        return {...prevState}
+                    })
+                })
+            })
         }
         else{
-            axios.post(`/savings/add?amount=${amount}`);
-            console.log('add', amount)
+            axios.post(`/savings/add?amount=${amount}`)
+            .then(response => {
+                axios.get('/finances/balance')
+                .then(response => {
+                    appState.setState(prevState =>{
+                        prevState.totalBalance = response.data;
+                        return {...prevState}
+                    })
+                })
+            })
         }
     }
 
@@ -65,15 +83,6 @@ function SavingDialog(){
             </Grid>
             </form>
             </> 
-
-
-
-
-
     )
-
-
-
-
 }
 export default SavingDialog;

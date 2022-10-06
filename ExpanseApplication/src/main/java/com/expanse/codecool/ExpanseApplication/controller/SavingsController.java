@@ -51,7 +51,7 @@ public class SavingsController {
     }
 
     @CrossOrigin
-    @PostMapping(value="/setbalance")
+    @PostMapping(value="/setsavings")
     public void userSaving(@RequestParam Long amount){
         Saving newSaving = new Saving(amount);
         savingService.save(newSaving);

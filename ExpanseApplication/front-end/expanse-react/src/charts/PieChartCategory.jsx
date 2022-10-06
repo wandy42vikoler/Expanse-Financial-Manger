@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import {appStateContext} from '../store'
 import { Chart } from 'primereact/chart';
 
 
@@ -8,39 +9,37 @@ const DoughnutChart = () => {
     const [chartData, setChartData] = useState([]);
 
 
+    const appState = useContext(appStateContext);
+
+    axios.defaults.baseURL = 'http://localhost:8080';
+
+
+    useEffect(()=>{
+        axios.get('/categories/four')
+            .then(response => {
+                appState.setState(prevState => {
+                    prevState.pieCategories = response.data;
+                    return {...prevState};
+                })
+            })
+            .catch(error => console.log(error))
+    },[])
+
+    let categoryTitle = [];
+    let categoryAmounts = [];
+
+
+    appState.pieCategories.map(item => categoryTitle.push(item.name));
+    appState.pieCategories.map(item => categoryAmounts.push(item.amount));
+
+
 
     useEffect(() => {
-
-        axios.defaults.baseURL = 'http://localhost:8080';
-
-            async function getCategories(){
-                try{
-                    return await axios.get('/categories/four')
-                    .then(response => {
-                        response.data.map(title => {
-                            categoryTitle.push(title.name)
-                            categoryAmounts.push(title.amount)
-                            return null;
-                        }
-                    )})
-                }
-                catch(err){
-                    console.log(err)
-                }
-            }
-
-            getCategories()
-
-            const categoryTitle = [];
-
-
-                
-        
-            const categoryAmounts = [];
             
          
 
             console.log('Amounts', categoryAmounts)
+            console.log("pieCategories", appState.pieCategories)
 
 
 
@@ -63,8 +62,8 @@ const DoughnutChart = () => {
                     ]
                 }]
         };
-        setChartData(dataForChart)
-    },[])
+        setChartData(dataForChart);
+    },[appState.pieCategories])
 
 
     const lightOptions = {

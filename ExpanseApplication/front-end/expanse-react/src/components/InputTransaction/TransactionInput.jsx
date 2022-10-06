@@ -71,6 +71,42 @@ function TransactionsInputForm({onClose}) { //passing props from parent to child
                 console.log(error)
             })
         })
+        .then(response => {
+            axios.get('http://localhost:8080/transaction/incomesvalue')
+            .then(response => {
+                appState.setState(prevState => {
+                    prevState.totalIncome = response.data;
+                    return {...prevState};
+                })
+            })
+        })
+        .then(response => {
+            axios.get('http://localhost:8080/transaction/expensesvalue')
+            .then(response => {
+                appState.setState(prevState => {
+                    prevState.totalExpense = response.data;
+                    return {...prevState};
+                })
+            })
+        })
+        .then(response => {
+            axios.get('http://localhost:8080/categories/four')
+            .then(response => {
+                appState.setState(prevState => {
+                    prevState.pieCategories = response.data;
+                    return {...prevState};
+                })
+            })
+        })
+        .then(response => {
+            axios.get('http://localhost:8080/finances/balance')
+            .then(response =>{
+                appState.setState(prevState =>{
+                    prevState.totalBalance = response.data;
+                    return {...prevState}
+                })
+            })
+        })
     }
 
     

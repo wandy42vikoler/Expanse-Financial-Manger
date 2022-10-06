@@ -1,6 +1,7 @@
 import "../index.css";
 import axios from 'axios';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
+import { appStateContext } from "../store";
 
 
 
@@ -10,18 +11,20 @@ function TotalBalanceComponent() {
 
     axios.defaults.baseURL = 'http://localhost:8080';
 
-    const [balance, setBalance] = useState(0);
+    const appState = useContext(appStateContext)
 
     useEffect(()=> {
         axios.get('/finances/balance')
         .then(response => {
-            console.log('balance', response.data)
-            setBalance(response.data)
+            appState.setState(prevState =>{
+                prevState.totalBalance = response.data;
+                return {...prevState}
+            })
         })
         .catch(error => {
             console.log(error)
         })
-    },[balance])
+    },[])
 
     let amountFormatter = Intl.NumberFormat('de-DE', { 
         style: 'currency', 
@@ -37,7 +40,7 @@ function TotalBalanceComponent() {
             <div className="card_body">
                 <h5 className="card_title">Total Balance</h5>
                 <p className="card_data">
-                {amountFormatter.format(balance)}
+                {amountFormatter.format(appState.totalBalance)}
                 </p>
             </div>
         </div>

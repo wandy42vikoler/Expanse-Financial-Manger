@@ -5,8 +5,6 @@ import com.expanse.codecool.ExpanseApplication.repository.BalanceRepository;
 import com.expanse.codecool.ExpanseApplication.service.DAO.BalanceDAO;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class BalanceService implements BalanceDAO {
 

@@ -58,7 +58,7 @@ function TotalSavingComponent() {
         <Dialog open={savingDialog} onClose={handleClose} sx={{width: '1500px'}}>
             <DialogTitle sx={{ marginBottom: '5px' }}>Add/Deduct Saving: </DialogTitle>
             <DialogContent onClose={handleClose} fullWidth maxWidth="xl">
-                <SavingDialog />
+                <SavingDialog/>
             </DialogContent>
         </Dialog>
         </>
