@@ -1,45 +1,40 @@
-import React, {useState} from 'react';
-import axios from 'axios';
-import './App.css'
-import TotalBalanceComponent from './components/totalBalance';
-import TotalExpenseComponent from './components/TotalExpense';
-import TotalIncomeComponent from './components/TotalIncome';
-import TotalSavingComponent from './components/TotalSavings';
-import TransactionsTable from './components/Transactions';
-import ActivityComponent from './components/categoryExpensePie';
-import LeaderboardComponent from './components/leaderboard';
-import ChartsComponent from './components/charts';
+import './index.css'
+import React from 'react';
+import Sidebar from './components/Sidebar';
+import HomeDashboard from './Pages/home';
+import SavingsPage from './Pages/Savings';
+import LeaderboardPage from './Pages/Leaderboard';
+import Portfolio from './Pages/Portfolio';
+import {AppStateProvider} from './store';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './Security/Login'
-import Register from './Security/Register';
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from 'react-router-dom';
 
 
 
 function App() {
 
-  axios.defaults.baseURL = 'localhost:8080';
-
-  const [message, setMessage] = useState("Nie Wok");
-
-  axios.put('http://localhost:8080/message').then(response => {   //include useEffect for fetching to not ending in a loop
-    console.log('resp', response);
-    console.log(response.data);
-    setMessage(response.data)
-    console.log("test", response.data);
-  })
-    
-
   return (
-    <div>
-      <div className='data_box'>
-        <Login />
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <Register />
+    <>
+    <AppStateProvider>
+    <Router>
+      <Sidebar/>
+      <div className='content'>
+        <Routes>
+          <Route path="/" element={<HomeDashboard/>}/>
+          <Route path="/savings" element={<SavingsPage/>}/>
+          <Route path="/leaderboard" element={<LeaderboardPage/>}/>
+          <Route path="/portfolio" element={<Portfolio/>}/>
+        </Routes>
       </div>
-    </div>
+    </Router>
+    </AppStateProvider>
+    </>
   );
 }
 

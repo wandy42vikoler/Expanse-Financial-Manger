@@ -16,13 +16,14 @@ public class Transaction {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long TransactionId;
     private String title;
     private String category;
     private LocalDate date;
     private Long amount;
 
+    @Enumerated(value = EnumType.STRING)
     private TransactionType transactionType;
 
     public Transaction(String title, String category, LocalDate date, Long amount, TransactionType transactionType) {

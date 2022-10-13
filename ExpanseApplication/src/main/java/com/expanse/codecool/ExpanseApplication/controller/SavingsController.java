@@ -1,6 +1,10 @@
 package com.expanse.codecool.ExpanseApplication.controller;
 
 
+import com.expanse.codecool.ExpanseApplication.entity.Saving;
+import com.expanse.codecool.ExpanseApplication.service.BalanceService;
+import com.expanse.codecool.ExpanseApplication.service.SavingService;
+import com.expanse.codecool.ExpanseApplication.service.TransactionService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,21 +13,47 @@ import java.util.List;
 @RequestMapping(value="/savings")
 public class SavingsController {
 
+    private final SavingService savingService;
+    private final BalanceService balanceService;
+
+    public SavingsController(SavingService savingService, TransactionService transactionService, BalanceService balanceService) {
+        this.savingService = savingService;
+        this.balanceService = balanceService;
+    }
+
+
     @CrossOrigin
     @GetMapping
-    public String savingBalance(){
-        return "Saving Balance";
+    public Long savingBalance(){
+        return savingService.getSavingAmount();
     }
 
     @CrossOrigin
-    @PostMapping(value="add/{amount}")
-    public String addToSaving(@PathVariable int amount){
-        return "Added Amount " + amount;
+    @GetMapping(value="/getall")
+    public List<Saving> getAll(){
+        return savingService.getAll();
     }
 
     @CrossOrigin
-    @PostMapping(value="deduct/{amount}")
-    public String removeFromSaving(@PathVariable int amount){
-        return "Deducted " + amount;
+    @PostMapping(value="/add")
+    public void addToSaving(@RequestParam long amount){
+        Long updateAmount = savingService.getSavingAmount() + amount;
+        savingService.updateSaving(updateAmount);
+        balanceService.updateBalance(balanceService.getBalance() - amount);
+    }
+
+    @CrossOrigin
+    @PostMapping(value="/deduct")
+    public void removeFromSaving(@RequestParam long amount){
+        Long updateAmount = savingService.getSavingAmount() - amount;
+        savingService.updateSaving(updateAmount);
+        balanceService.updateBalance(balanceService.getBalance() + amount);
+    }
+
+    @CrossOrigin
+    @PostMapping(value="/setsavings")
+    public void userSaving(@RequestParam Long amount){
+        Saving newSaving = new Saving(amount);
+        savingService.save(newSaving);
     }
 }
