@@ -5,7 +5,10 @@ import HomeDashboard from './Pages/home';
 import SavingsPage from './Pages/Savings';
 import LeaderboardPage from './Pages/Leaderboard';
 import Portfolio from './Pages/Portfolio';
-import {AppStateProvider} from './store';
+import Login from './Security/Login';
+import Register from './Security/Register';
+
+import { AppStateProvider } from './store';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -21,19 +24,16 @@ function App() {
 
   return (
     <>
-    <AppStateProvider>
-    <Router>
-      <Sidebar/>
-      <div className='content'>
-        <Routes>
-          <Route path="/" element={<HomeDashboard/>}/>
-          <Route path="/savings" element={<SavingsPage/>}/>
-          <Route path="/leaderboard" element={<LeaderboardPage/>}/>
-          <Route path="/portfolio" element={<Portfolio/>}/>
-        </Routes>
-      </div>
-    </Router>
-    </AppStateProvider>
+      <AppStateProvider>
+        <Router>
+          <div className='content'>
+            <Routes>
+              <Route path="/" element={<Register />} />
+              <Route path="/Login" element={<Login />} />
+            </Routes>
+          </div>
+        </Router>
+      </AppStateProvider>
     </>
   );
 }

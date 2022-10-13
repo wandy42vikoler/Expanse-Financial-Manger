@@ -23,7 +23,7 @@ public class Controller {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/")
+    @GetMapping("/security")
     public String index() {
         return "index";
     }
