@@ -2,13 +2,13 @@ import { useRef, useState, useEffect } from "react";
 import "./security.css";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from 'axios';
+import axios from './axios';
 
-axios.defaults.baseURL = 'http://localhost:8080';
+//axios.defaults.baseURL = 'http://localhost:3000';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = '/security/register';
+const REGISTER_URL = '/register';
 
 const Register = () => {
   const userRef = useRef();
@@ -60,15 +60,13 @@ const Register = () => {
         JSON.stringify({ user, pwd }),
         {
           headers: { 'Content-Type': 'application/json' },
-          withCredentials: true
+          withCredentials: false
         }
       );
       console.log(response?.data);
       console.log(response?.accessToken);
       console.log(JSON.stringify(response))
       setSuccess(true);
-      //clear state and controlled inputs
-      //need value attrib on inputs for this
       setUser('');
       setPwd('');
       setMatchPwd('');
@@ -79,6 +77,7 @@ const Register = () => {
         setErrMsg('Username Taken');
       } else {
         setErrMsg('Registration Failed')
+        console.log(err)
       }
       errRef.current.focus();
     }
@@ -174,8 +173,7 @@ const Register = () => {
           <p>
             Already registered?<br />
             <span className="line">
-              {/*put router link here*/}
-              <a href="./Login">Sign In</a>
+              <a href="./login">Sign In</a>
             </span>
           </p>
         </section>

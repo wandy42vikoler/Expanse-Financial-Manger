@@ -1,4 +1,4 @@
-package com.expanse.codecool.ExpanseApplication.security;
+/*package com.expanse.codecool.ExpanseApplication.security;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,3 +37,4 @@ public class Attempts {
         this.attempts = attempts;
     }
 }
+ */

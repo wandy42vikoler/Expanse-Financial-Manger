@@ -21,20 +21,16 @@ public class SavingsController {
         this.balanceService = balanceService;
     }
 
-
-    @CrossOrigin
     @GetMapping
     public Long savingBalance(){
         return savingService.getSavingAmount();
     }
 
-    @CrossOrigin
     @GetMapping(value="/getall")
     public List<Saving> getAll(){
         return savingService.getAll();
     }
 
-    @CrossOrigin
     @PostMapping(value="/add")
     public void addToSaving(@RequestParam long amount){
         Long updateAmount = savingService.getSavingAmount() + amount;
@@ -42,7 +38,6 @@ public class SavingsController {
         balanceService.updateBalance(balanceService.getBalance() - amount);
     }
 
-    @CrossOrigin
     @PostMapping(value="/deduct")
     public void removeFromSaving(@RequestParam long amount){
         Long updateAmount = savingService.getSavingAmount() - amount;
@@ -50,7 +45,6 @@ public class SavingsController {
         balanceService.updateBalance(balanceService.getBalance() + amount);
     }
 
-    @CrossOrigin
     @PostMapping(value="/setsavings")
     public void userSaving(@RequestParam Long amount){
         Saving newSaving = new Saving(amount);
