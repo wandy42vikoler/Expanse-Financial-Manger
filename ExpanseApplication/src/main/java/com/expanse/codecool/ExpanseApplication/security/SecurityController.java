@@ -1,6 +1,5 @@
 package com.expanse.codecool.ExpanseApplication.security;
 
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -18,9 +18,12 @@ public class SecurityController {
     private final SecurityUserDetailsService userDetailsManager;
     private final PasswordEncoder passwordEncoder;
 
-    public SecurityController(SecurityUserDetailsService userDetailsManager, PasswordEncoder passwordEncoder) {
+    private final UserRepository userRepository;
+
+    public SecurityController(SecurityUserDetailsService userDetailsManager, PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.userDetailsManager = userDetailsManager;
         this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/security")
@@ -28,11 +31,13 @@ public class SecurityController {
         return "index";
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public String login(HttpServletRequest request, HttpSession session) {
         session.setAttribute(
                 "error", getErrorMessage(request)
         );
+        List<Person> people = userRepository.findAll();
+        System.out.println(people);
         return "login";
     }
 
@@ -42,13 +47,13 @@ public class SecurityController {
     }
 
     @PostMapping(
-            value = "/register",
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = {
-            MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}
+            value = "/register"//,
+            //        consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = {
+            //        MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}
     )
     public void addUser(@RequestBody Map<String, String> body) {
         Person user = new Person();
-        user.setUsername(body.get("username"));
+        user.setUsername(body.get("user"));
         user.setPassword(passwordEncoder.encode(body.get("password")));
         user.setAccountNonLocked(true);
         userDetailsManager.createUser(user);

@@ -4,8 +4,6 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from './axios';
 
-//axios.defaults.baseURL = 'http://localhost:3000';
-
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/register';
@@ -57,10 +55,9 @@ const Register = () => {
     }
     try {
       const response = await axios.post(REGISTER_URL,
-        JSON.stringify({ user, pwd }),
+        JSON.stringify({ user, password: pwd }),
         {
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: false
+          headers: { 'Content-Type': 'application/json' }
         }
       );
       console.log(response?.data);

@@ -17,18 +17,8 @@ public class ApplicationConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .and()
-                .cors()
-                .disable()
-                .authorizeRequests().antMatchers("/register**/")
-                .permitAll().anyRequest().authenticated()
-                .and()
-                .formLogin().loginPage("/login/")
-                .permitAll()
-                .and()
-                .logout().invalidateHttpSession(true)
-                .clearAuthentication(true).permitAll();
+                .csrf().disable()
+                .authorizeRequests(lambda -> lambda.anyRequest().permitAll());
         return http.build();
     }
 }
