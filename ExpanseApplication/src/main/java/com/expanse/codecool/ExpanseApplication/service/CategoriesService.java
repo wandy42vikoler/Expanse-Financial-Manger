@@ -10,7 +10,7 @@ import java.util.Optional;
 
 
 @Service
-public class CategoriesService implements CategoriesDAO {
+public class  CategoriesService implements CategoriesDAO {
 
 
     private final CategoriesRepository categoriesRepository;

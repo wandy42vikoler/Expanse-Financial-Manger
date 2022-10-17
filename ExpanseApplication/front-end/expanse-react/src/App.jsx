@@ -1,4 +1,4 @@
-import './index.css'
+import './App.css'
 import React from 'react';
 import Sidebar from './components/Sidebar';
 import HomeDashboard from './Pages/home';
@@ -12,18 +12,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
   Route,
-  Routes
-} from 'react-router-dom';
+  Routes,
+} 
+from 'react-router-dom';
+import Layout from './components/Layout';
 
 
 
 function App() {
+
+
 
   return (
     <>
     <AppStateProvider>
     <Router>
       <Sidebar/>
+      <Layout>
       <div className='content'>
         <Routes>
           <Route path="/" element={<HomeDashboard/>}/>
@@ -32,6 +37,7 @@ function App() {
           <Route path="/portfolio" element={<Portfolio/>}/>
         </Routes>
       </div>
+      </Layout>
     </Router>
     </AppStateProvider>
     </>

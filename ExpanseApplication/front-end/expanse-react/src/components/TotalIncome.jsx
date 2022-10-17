@@ -1,7 +1,9 @@
 import "../App.css";
 import React, {useContext, useEffect} from "react";
 import axios from 'axios';
-import {appStateContext} from '../store'
+import {appStateContext} from '../store';
+import { Card } from "./card";
+
  
 
 function TotalIncome() {
@@ -32,15 +34,7 @@ function TotalIncome() {
 
 
     return (
-        <div className="card_component_totIncome">
-        <img className="card_icon" src="https://www.clipartmax.com/png/middle/99-999995_low-cost-icon-money-with-an-arrow.png" alt="income icon" width='40' />
-            <div className="card_body">
-                <h5 className="card_title">Total Income</h5>
-                <p className="card_data">
-                {amountFormatter.format(appState.totalIncome)}
-                </p>
-            </div>
-        </div>
+        <Card title={'Total Income'} amount={amountFormatter.format(appState.totalIncome)} imgSrc={"https://cdn-icons-png.flaticon.com/512/2315/2315648.png"}/>
     );
 }
 

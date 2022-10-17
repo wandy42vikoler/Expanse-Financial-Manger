@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 import axios from 'axios';
+import '../App.css';
 
 const BarChart = () => {
 
@@ -82,28 +83,25 @@ const BarChart = () => {
         let basicOptions = {
             maintainAspectRatio: false,
             //aspectRatio: .8,
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#495057'
-                    }
-                }
-            },
             scales: {
                 x: {
                     ticks: {
-                        color: '#495057'
+                        color: '#495057',
+                        display: false
                     },
                     grid: {
-                        color: '#ebedef'
+                        color: '#ebedef',
+                        display: false,
                     }
+
                 },
                 y: {
                     ticks: {
-                        color: '#495057'
+                        color: '#495057',
                     },
                     grid: {
-                        color: '#ebedef'
+                        color: '#ebedef',
+                        display: false
                     }
                 }
             }
@@ -120,7 +118,7 @@ const BarChart = () => {
     return (
 
         <div>
-            <Chart type="bar" data={basicData} options={basicOptions} style={{ position: 'relative', height: '250px', width: '530px', display: 'block', boxSizing: 'border-box' }} />
+            <Chart type="bar" data={basicData} options={basicOptions} style={{ height: '250px', width: '530px', marginLeft: '10px', fontFamily: 'Sora', fontWeight: '800px'}} />
         </div>
 
     )

@@ -8,6 +8,7 @@ import Savings from '../assets/savings.svg';
 import Stock from '../assets/stock.svg';
 import Leaderboard from '../assets/leaderboard.svg';
 import styled from "styled-components";
+import { Link} from 'react-router-dom';
 
 const Container = styled.div`
   position: fixed;
@@ -159,15 +160,15 @@ const Sidebar = () => {
         </Logo>
         <SlickBar clicked={click}>
           <Item onClick={() => setClick(false)}>
-          <a href="/">
+          <Link to="/">
             <img src={Home} alt="Home" />
-          </a>
+          </Link>
             <Text clicked={click}>Home</Text>
           </Item>
           <Item onClick={() => setClick(false)}  href="/savings">
-            <a href="/savings">
+            <Link to="/savings">
               <img src={Savings} alt="Savings" />
-            </a>
+            </Link>
             <Text clicked={click}>Savings</Text>
           </Item>
           <Item onClick={() => setClick(false)} href="/portfolio">

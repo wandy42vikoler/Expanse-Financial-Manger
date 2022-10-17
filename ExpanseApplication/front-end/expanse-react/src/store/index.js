@@ -25,7 +25,6 @@ export function AppStateProvider(props){
     const appState = {
         ...state, //spread syntax/operator
         setState,
-
     }
 
     console.log({appState})

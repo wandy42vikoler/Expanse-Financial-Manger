@@ -2,14 +2,16 @@ import "../App.css";
 import React, {useState, useEffect, useContext} from "react";
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
-import Box from '@mui/material/Box';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
 import TransactionsInputForm from "./InputTransaction/TransactionInput";
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import {appStateContext} from '../store'
+import {appStateContext} from '../store';
+import { Button, TableRow } from "@mui/material";
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import Incoming from '../assets/incomemon.jpg';
+import Outgoing from '../assets/outgonemono.jpg';
 
 
  
@@ -52,46 +54,84 @@ function TransactionsComponent() {
       };
 
 
-      console.log('appStTRans', appState.transactions)
+      const cardStyle = {
+        width: '440px',
+        height: '253px',
+        overflow: 'scroll' 
+    }
+
+    const titleStyle = {
+        fontFamily: 'Manrope',
+        fontWeight: '800',
+        fontSize: '22px',
+        lineHeight: '16px',
+        color: '#050624',
+        marginTop: '15px',
+        marginLeft: '5px',
+        maxWidth: '80px',
+        display: 'inline-block'
+    }
+
+    const buttonStyle = {
+        width: '130px',
+        height: '26px',
+        background: 'linear-gradient(90deg, #3E79E5 0%, #01B8E3 100%)',
+        borderRadius: '10px',
+        display: 'inline-block',
+        float: 'right',
+        marginTop: '15px',
+        cursor: 'pointer',
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)'
+    }
+
+    const buttonTextStyle = {
+        fontFamily: 'Sora',
+        fontStyle: 'normal',
+        fontWeight: '500',
+        marginTop: '1px',
+        fontSize: '12px',
+        lineHeight: '15px',
+        textAlign: 'center',
+        verticalAlign: 'middle',
+        lineHeight: '24px',
+        color: 'white'
+    }
+
+    const TransactionButton = <div style={buttonStyle} onClick={handleClickOpen}><p style={buttonTextStyle}>Make transaction</p></div>
 
 
 
 
     return (
-        <div className="transaction_card" style={{overflow: 'scroll'}}>
-            <Box sx={{ '& > :not(style)': { m: 1 } }}>
-                <Fab size="small" color="primary" aria-label="add" style={{float: 'right'}} onClick={handleClickOpen}>
-                    <AddIcon/>
-                </Fab>
-            </Box>
-            <h5 className="card_title_activity">Transactions</h5>
-            <Table className="transactions_table">
-                <thead>
-                    <tr>
-                        <th className="card_title">Title</th>
-                        <th className="card_title">Type</th>
-                        <th className="card_title">Date</th>
-                        <th className="card_title">Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <>
+        <div style={cardStyle}>
+            <div style={{marginBottom: '15px'}}>
+                <h1 style={titleStyle}>Transactions</h1>
+                {TransactionButton}
+            </div>
+            <Table sx={{ minWidth: 471}} aria-label="simple table">
+                <TableBody sx={{fontFamily: 'Sora'}}>
                 {appState.transactions.map(item => (
-                    <tr>
-                        <td key={item.transactionId}>{item.title}</td>
-                        <td key={item.transactionId}>{item.category}</td>
-                        <td key={item.transactionId}>{item.date}</td>
-                        <td key={item.transactionId}>{amountFormatter.format(item.amount)}</td>
-                    </tr>
-                ))}
-                </tbody>
+                    <TableRow sx={{verticalAlign: 'center'}}>
+                        <TableCell align="left" sx={{padding: '0 0 0 0', marginLeft: '5px', fontSize: '16px'}}><p style={{fontWeight: 'bold', marginBottom: '0px', fontFamily: 'Sora'}}>{item.title}</p></TableCell>
+                        <TableCell align="left" sx={{fontFamily: 'Sora', marginLeft: '5px', fontSize: '16px'}}>{item.category}</TableCell>
+                        <TableCell align="left" sx={{fontFamily: 'Sora', fontSize: '16px'}}><img src={item.transactionType === 'EXPENSE' ? Incoming : Outgoing} alt="incoming" width="28px"></img></TableCell>
+                        <TableCell align="left" sx={{fontFamily: 'Sora', fontSize: '12px'}}>{item.date}</TableCell>
+                        <TableCell align="left" sx={{fontFamily: 'Sora', fontWeight: 'bold', fontSize: '16px'}}>{item.transactionType === 'EXPENSE' ? '-'+amountFormatter.format(item.amount): '+'+amountFormatter.format(item.amount)}</TableCell>
+                    </TableRow>
+                    ))}
+                </TableBody>
             </Table>
+        </div>
+
             <Dialog open={open} onClose={handleClose} sx={{width: '1500px'}}>
                 <DialogTitle sx={{marginBottom: '5px'}}>Add Transaction: </DialogTitle>
                 <DialogContent fullWidth maxWidth="xl">
                     <TransactionsInputForm onClose={handleClose}/>   
                 </DialogContent>
             </Dialog>
-        </div>
+        </>
+        
     );
 }
 

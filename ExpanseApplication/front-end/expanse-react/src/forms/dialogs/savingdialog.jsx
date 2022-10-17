@@ -52,18 +52,18 @@ function SavingDialog(){
     return (
         <>
         <form onSubmit={handleSubmit}>
-        <Grid container spacing={1} /><Grid item xs>
-            <Grid item xs>
+        <Grid container spacing={2} sx={{marginTop: '5px'}}>
+            <Grid item xs={12} sm={6} md={6}>
             <FormControl>
                 <OutlinedInput
                     id="amount"
-                    label="amount"
+                    label="Amount"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                     startAdornment={<InputAdornment position="start">€</InputAdornment>} />
             </FormControl>
             </Grid>
-            <Grid item xs>
+            <Grid item xs={12} sm={6} md={6}>
             <FormControl>
                 <InputLabel id="type">Add/Deduct</InputLabel>
                 <Select id="type" label="Add/Deduct" placeholder="Add/Deduct" value={type} onChange={(e) => setType(e.target.value)} fullWidth>
@@ -72,9 +72,8 @@ function SavingDialog(){
             </Select>
             </FormControl>
             </Grid>
-            <Grid item xs>
+            <Grid xs={12} sm={6} md={12}>
             <FormControl>
-            
             <Button type="submit " variant="contained" color="success" style={{ marginLeft: '10px' }}>
                 Submit
             </Button>

@@ -2,6 +2,8 @@ import "../index.css";
 import axios from 'axios';
 import React, {useContext, useEffect} from 'react';
 import { appStateContext } from "../store";
+import { Card } from "./card";
+
 
 
 
@@ -31,19 +33,11 @@ function TotalBalanceComponent() {
         currency: 'EUR' })
 
 
-    
+    //<Card title={'Total Balance'} amount={amountFormatter.format(appState.totalBalance)}/>
 
     return (
 
-        <div className="card_component_totBalance">
-        <img className="card_icon" src="https://s3.amazonaws.com/syrasoft-tenant-facing-websites/Syrasoft_Poweredby/icons/hand.svg" alt="balance icon" width='40' />
-            <div className="card_body">
-                <h5 className="card_title">Total Balance</h5>
-                <p className="card_data">
-                {amountFormatter.format(appState.totalBalance)}
-                </p>
-            </div>
-        </div>
+        <Card title={'Total Balance'} amount={amountFormatter.format(appState.totalBalance)} imgSrc={"https://cdn-icons-png.flaticon.com/512/2315/2315648.png"}/>
     );
 }
 

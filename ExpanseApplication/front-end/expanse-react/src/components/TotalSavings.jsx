@@ -5,7 +5,9 @@ import axios from 'axios';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import SavingDialog from './../forms/dialogs/savingdialog'
+import SavingDialog from './../forms/dialogs/savingdialog';
+import { Card } from "./card";
+import { SavingsCard } from "./savingCard";
  
 
 function TotalSavingComponent() {
@@ -39,26 +41,15 @@ function TotalSavingComponent() {
         setSavingDialog(false);
     };
 
-    const addDeductLink = <Button size='small' onClick={handleOpen} style={{float: 'right', marginRight: '10px'}}>Add/Deduct</Button>
-
 
     return (
 
         <>
-        <div className="card_component_Savings">
-            <img className="card_icon" src="https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/014/889/original/piggy-bank_4633700.png" alt="saving icon" width='40' />
-            <div className="card_body">
-                <h5 className="card_title">Total Saving</h5>
-                <p className="card_data">
-                    {amountFormatter.format(saving)}
-                    {addDeductLink}
-                </p>
-            </div>
-        </div>
-        <Dialog open={savingDialog} onClose={handleClose} sx={{width: '1500px'}}>
+        <SavingsCard title={'Total Savings'} amount={amountFormatter.format(saving)} buttonHandler={handleOpen}/>
+        <Dialog open={savingDialog} onClose={handleClose} sx={{ minWidth: '1500px' }}>
             <DialogTitle sx={{ marginBottom: '5px' }}>Add/Deduct Saving: </DialogTitle>
-            <DialogContent onClose={handleClose} fullWidth maxWidth="xl">
-                <SavingDialog/>
+            <DialogContent sx={{display: 'inline-block', minWidth: '500px'}} onClose={handleClose} fullWidth maxWidth="xl">
+                <SavingDialog />
             </DialogContent>
         </Dialog>
         </>

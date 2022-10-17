@@ -1,205 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400&family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
 
-.main {
-  position: absolute;
-  width: 1512px;
-  height: 982px;
+
+
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  pointer-events: none;
+  width: 100%;
 }
 
-.logo {
-  position: absolute;
-  width: 66.53px;
-  height: 49.38px;
-  left: 21.17px;
-  top: 13.17px;
+.card-balances {
+  align-items: flex-start;
+  background-color: rgba(250, 251, 252, 1);
+  border: 1px solid;
+  border-color: linear-gradient(0deg, #FAFBFC, #FAFBFC), linear-gradient(90deg, rgba(240, 240, 240, 0.2) 0%, rgba(240, 240, 240, 0) 100%);
+  display: flex;
+  gap: 82px;
+  padding: 8px 16px;
+  width: 253px;
 
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 43px;
-
-  color: #000000;
-
-}
-
-.greeting{
-  position: absolute;
-  width: 298.18px;
-  height: 72.13px;
-  left: 106.5px;
-  top: 32.79px;
-
-  font-weight: 900;
-  font-size: 20px;
-  line-height: 23px;
-
-  color: #000000;
-}
-
-.user_name {
-  position: absolute;
-width: 151.2px;
-height: 24.69px;
-left: 1147.6px;
-top: 46.22px;
-font-weight: 700;
-font-size: 16px;
-line-height: 18px;
-
-color: #000000;
-}
-
-.card_component_totBalance {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 301.2px;
-  height: 137.71px;
-  left: 86.5px;
-  top: 117.38px;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 5px 0 rgba(0, 0, 0, 0.09);
-  font-family: "M PLUS Rounded 1c", sans-serif;
-  border-radius: 20px;
-}
-
-.card_component_totIncome {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 301.2px;
-  height: 137.71px;
-  left: 429.86px;
-  top: 117.38px;
-
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 5px 0 rgba(0, 0, 0, 0.09);
-  font-family: "M PLUS Rounded 1c", sans-serif;
-  border-radius: 20px;
-}
-
-.card_component_totExpenses {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 301.2px;
-  height: 137.71px;
-  left: 773.23px;
-  top: 117.38px;
-
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 5px 0 rgba(0, 0, 0, 0.09);
-  font-family: "M PLUS Rounded 1c", sans-serif;
-  border-radius: 20px;
-}
-
-
-.card_component_Savings {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 301.2px;
-  height: 137.71px;
-  left: 1106.59px;
-  top: 117.38px;
-
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 5px 0 rgba(0, 0, 0, 0.09);
-  font-family: "M PLUS Rounded 1c", sans-serif;
-  border-radius: 20px;
-}
-
-
-.transaction_card {
-  box-sizing: border-box;
-  position: absolute;
-  width: 542.15px;
-  height: 304.93px;
-  left: 86.5px;
-  top: 307.55px;
-
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 5px 0 rgba(0, 0, 0, 0.09);
-  font-family: "M PLUS Rounded 1c", sans-serif;
-  border-radius: 20px;
-}
-
-.card_icon{
-  width: 2rem;
-  float: right;
-  margin-right: 20px;
-  margin-top: 10px;
-  
-}
-
-.card_content{
-  line-height: 150px;
-  height: 150px;
-}
-
-.card_body{
-  margin-top: 40px;
-  margin-left: 20px;
-}
-
-.card_data{
-  margin-top: 30px;
-}
-
-.transactions_table {
-  margin-top: 30px;
-}
-
-.card_component_activity {
-  box-sizing: border-box;
-  position: absolute;
-  width: 382.52px;
-  height: 304.93px;
-  left: 696px;
-  top: 307.55px;
-  
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 5px 0 rgba(0, 0, 0, 0.09);
-  font-family: "M PLUS Rounded 1c", sans-serif;
-  border-radius: 20px;
-}
-
-.card_title_activity{
-  margin-top: 10px;
-  margin-left: 10px;
-  font-weight: 700;
-  
-}
-
-.leaderboard_card{
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 259.03px;
-  height: 304.93px;
-  left: 1148.76px;
-  top: 307.55px;
-
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 5px 0 rgba(0, 0, 0, 0.09);
-  font-family: "M PLUS Rounded 1c", sans-serif;
-  border-radius: 20px;
-}
-
-.charts_card {
-  box-sizing: border-box;
-  position: absolute;
-  display: block;
-  width: 551px;
-  height: 256px;
-  left: 77px;
-  top: 655px;
-
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 5px 0 rgba(0, 0, 0, 0.09);
-  font-family: "M PLUS Rounded 1c", sans-serif;
-  border-radius: 20px;
-}
-
-.profile_avatar{
-  position: absolute;
-  left: 1298px;
-  top: 26px;
-}
-
-.card_title {
-  font-weight: 700;
 }
 
   

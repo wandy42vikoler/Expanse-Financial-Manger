@@ -78,7 +78,7 @@ const DoughnutChart = () => {
 
     return (
         
-            <Chart type="doughnut" data={chartData} options={lightOptions} style={{ position: 'relative', width: '80%' }} />
+            <Chart type="doughnut" data={chartData} options={lightOptions} style={{ position: 'relative', width: '55%', marginLeft: '100px' }} />
     )
 }
 

@@ -1,7 +1,9 @@
 import "../App.css";
 import React, {useContext, useEffect} from "react";
 import axios from 'axios';
-import {appStateContext} from '../store'
+import {appStateContext} from '../store';
+import { Card } from "./card";
+
 
  
 
@@ -31,17 +33,7 @@ function TotalExpense() {
 
     return (
 
-        <div className="card_component_totExpenses">
-            <div>
-                <img className="card_icon" src="https://cdn-icons-png.flaticon.com/512/2315/2315648.png" alt="expense icon" width='40'/>
-            </div>
-            <div className="card_body">
-                <h5 className="card_title">Total Expense</h5>
-                <p className="card_data">
-                {amountFormatter.format(appState.totalExpense)}
-                </p>
-            </div>
-        </div>
+        <Card title={'Total Expense'} amount={amountFormatter.format('-' + appState.totalExpense)} imgSrc={"https://cdn-icons-png.flaticon.com/512/2315/2315648.png"}/>
     );
 }
 

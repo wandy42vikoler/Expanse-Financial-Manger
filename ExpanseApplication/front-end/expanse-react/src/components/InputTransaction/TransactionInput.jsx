@@ -72,7 +72,7 @@ function TransactionsInputForm({onClose}) { //passing props from parent to child
             })
         })
         .then(response => {
-            axios.get('http://localhost:8080/transaction/incomesvalue')
+            axios.get('http://localhost:8080/transaction/incomesvalue') //promise API (promise.all) multiple requests at once
             .then(response => {
                 appState.setState(prevState => {
                     prevState.totalIncome = response.data;

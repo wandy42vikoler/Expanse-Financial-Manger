@@ -1,11 +1,8 @@
 import React from 'react';
+import { TransactionCard } from '../components/transactionCard';
 
 
 function LeaderboardPage(){
-    return (
-        <div>
-            Leaderboard coming soon!
-        </div>
-    )
+    
 }
 export default LeaderboardPage;

@@ -1,16 +1,15 @@
-import "../App.css";
+import { Card, CardContent } from "@mui/material";
 import DoughnutChart from "../charts/PieChartCategory";
+import '../App.css'
  
 
 function activityComponent() {
 
     return (
 
-        <div className="card_component_activity">
-                <h5 className="card_title_activity">Activity</h5>
-                <div style={{marginLeft: '70px', marginBottom:'30px'}}>
-                <DoughnutChart />
-                </div>
+        <div>
+                <span style={{ fontWeight: '800', fontSize: '22px', fontFamily: 'Manrope', marginLeft: '25px', marginTop: '15px'}}>Activity</span>
+                <DoughnutChart/>
         </div>
     );
 }
