@@ -200,11 +200,46 @@ function SavingsPage(){
         .catch(error => {
             console.log(error)
         })
-    })
+    }, [])
+
+    const [goals, setGoals] = useState([]);
+
+    useEffect(() => {
+        axios.get('/savings/saving-goals')
+        .then(response => {
+            console.log(response.data)
+            setGoals(response.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, [])
+
+    useEffect(()=> {
+        axios.get('/finances/balance')
+        .then(response => {
+            appState.setState(prevState =>{
+                prevState.totalBalance = response.data;
+                return {...prevState}
+            })
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    },[])
 
     const appState = useContext(appStateContext);
 
-    console.log(appState.totalBalance)
+
+    const [title, setTitle] = useState('');
+    const [amount, setAmount] = useState();
+    const [date, setDate] = useState('');
+
+
+
+    const handleSubmit = (event) => {
+        axios.post('/savings/saving-goals', {title: title,  date: date, amount: amount});
+    }
 
     let amountFormatter = Intl.NumberFormat('de-DE', { 
         style: 'currency', 
@@ -216,19 +251,19 @@ function SavingsPage(){
         <div style={inputForm}>
             <h1 style={{fontFamily: 'Manrope', fontWeight: '800', fontSize: '32px', lineHeight: '137%'}}>Time for a goal:</h1>
             
-            <form style={{marginTop: '20px'}}>
+            <form id="goalform" style={{marginTop: '20px'}} onSubmit={handleSubmit}>
             <Grid container rowSpacing={5} spacing={10}>
                 <Grid item md={4}>
                 <label style={labelStyle}>Your goal:</label><br></br>
-                <input style={inputField} type="text" id="goal-name" placeholder="Vacation (example)"></input>
+                <input style={inputField} type="text" id="goal-name" placeholder="Vacation (example)" onChange={(e) => setTitle(e.target.value)}></input>
                 </Grid>
                 <Grid item md={4}>
                 <label style={labelStyle}>Amount:</label><br></br>
-                <input style={inputField} type="number" id="goal-amount" placeholder="EUR"></input>
+                <input style={inputField} type="number" id="goal-amount" placeholder="EUR" onChange={(e) => setAmount(e.target.value)}></input>
                 </Grid>
                 <Grid item md={4}>
                 <label style={labelStyle}>Deadline:</label><br></br>
-                <input style={inputField} type="date" id="goal-deadline"></input>
+                <input style={inputField} type="date" id="goal-deadline" onChange={(e) => setDate(e.target.value)}></input>
                 </Grid>
                 <Grid item md={12}>
                 <input style={buttonStyle} type="submit" value='Add Goal'></input>
@@ -249,13 +284,9 @@ function SavingsPage(){
                 }}>Your Goals:</h1>
                 <div style={goalsProgressStyle}>
                 <Box sx={{ width: '100%'}}>
-                    <GoalProgressLine value={80} />
-                    <GoalProgressLine value={80} />
-                    <GoalProgressLine value={80} />
-                    <GoalProgressLine value={80} />
-                    <GoalProgressLine value={80} />
-                    <GoalProgressLine value={80} />
-                    <GoalProgressLine value={80} />
+                    {goals.map(goal =>(
+                    <GoalProgressLine name={goal.title} value={parseInt(saving) / parseInt(goal.amount) * 100} />
+                    ))}
                 </Box>
                 </div>
             </div>

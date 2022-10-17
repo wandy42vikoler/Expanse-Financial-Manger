@@ -8,7 +8,7 @@ function GoalProgressLine(props){
     return (
         <Box sx={{ alignItems: 'center', marginLeft: '10px', marginRight: '10px', paddingTop: '10px', borderBottom: '0.5px solid #A4B4CB', overflow: 'scroll', maxHeight: '280px'}}>
             <Box sx={{paddingLeft: '10px' }}>
-                <h6>Goal Name</h6>
+                <h6>{props.name}</h6>
             </Box>
         <Box sx={{ width: '80%', mr: 1, display: 'inline-block', paddingBottom: '2.5px', paddingLeft: '10px' }}>
             <LinearProgress variant="determinate" {...props} />
