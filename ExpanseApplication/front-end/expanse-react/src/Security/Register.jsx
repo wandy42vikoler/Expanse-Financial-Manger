@@ -152,10 +152,10 @@ const Register = () => {
   return (
     <div style={backgroundStyle}>
       {success ? (
-        <section>
+        <section style={registrationBoxStyle}>
           <h1>Success!</h1>
           <p>
-            <a href="./Login">Sign In</a>
+            <a style={{ fontFamily: 'Open Sans', color: '#5E72E4', textDecoration: 'none', fontWeight: 600, fontSize: '16px', paddingLeft: '10px'}} href="./Login">Sign In</a>
           </p>
         </section>
       ) : (
@@ -164,7 +164,7 @@ const Register = () => {
           <h1 style={titleStyle}>Register</h1>
           <form onSubmit={handleSubmit}>
             <label htmlFor="username">
-              <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
+              <FontAwesomeIcon icon={faCheck} className={validName ? "hide" : "hide"} />
               <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
             </label>
             <input

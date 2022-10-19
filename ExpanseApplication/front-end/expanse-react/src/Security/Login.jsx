@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import axios from './axios';
 import BackgroundImage from '../assets/logImage.jpg';
-import Logo from '../assets/logoexp.jpg';
 
 
 const LOGIN_URL = '/login';
@@ -126,11 +125,11 @@ const Login = () => {
   return (
     <div style={backgroundStyle}>
       {success ? (
-        <section>
-          <h1>You are logged in!</h1>
+        <section style={registrationBoxStyle}>
+          <h1 style={titleStyle}>You are logged in!</h1>
           <br />
-          <p>
-            <a href="/home">Go to Home</a>
+          <p style={messageBoxStyling}>
+            <a style={{ fontFamily: 'Open Sans', color: '#5E72E4', textDecoration: 'none', fontWeight: 600, fontSize: '16px', paddingLeft: '10px'}} href="/home">Go to Home</a>
           </p>
         </section>
       ) : (
