@@ -6,27 +6,22 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.io.Serial;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
 @ToString
 public class Person implements UserDetails {
-    @Serial
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private long userID;
     private String username;
     private String password;
-    private boolean accountNonLocked;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "read");
+        return List.of(() -> "USER");
     }
 
     @Override
@@ -54,7 +49,7 @@ public class Person implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return accountNonLocked;
+        return true;
     }
 
     @Override
@@ -65,13 +60,5 @@ public class Person implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public void setAccountNonLocked(Boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    public boolean getAccountNonLocked() {
-        return accountNonLocked;
     }
 }

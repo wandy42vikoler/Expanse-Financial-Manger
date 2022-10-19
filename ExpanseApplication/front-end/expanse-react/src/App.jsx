@@ -25,12 +25,14 @@ function App() {
   return (
     <>
       <AppStateProvider>
-        <div className='content'>
-          <Routes>
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </div>
+        <Router>
+          <div className='content'>
+            <Routes>
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </div>
+        </Router>
       </AppStateProvider>
     </>
   );

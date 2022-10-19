@@ -1,5 +1,6 @@
 package com.expanse.codecool.ExpanseApplication.security;
 
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,10 +20,10 @@ public class SecurityUserDetailsService implements UserDetailsService {
             throws UsernameNotFoundException {
         Person person = userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not present"));
-        return person;
-    }
-
-    public void createUser(UserDetails user) {
-        userRepository.save((Person) user);
+        UserDetails user = User.withUsername(person.getUsername())
+                .password(person.getPassword())
+                .authorities("USER").build();
+        System.out.println("user:" + user);
+        return user;
     }
 }

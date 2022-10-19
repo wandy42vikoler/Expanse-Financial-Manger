@@ -1,10 +1,8 @@
-import { useRef, useState, useEffect, useContext } from 'react';
-import AuthContext from "./Context/authProvider";
+import { useRef, useState, useEffect } from 'react';
 import axios from './axios';
 const LOGIN_URL = '/login';
 
 const Login = () => {
-  const { setAuth } = useContext(AuthContext);
   const userRef = useRef();
   const errRef = useRef();
 
@@ -31,11 +29,8 @@ const Login = () => {
           headers: { 'Content-Type': 'application/json' },
         }
       );
-      console.log(JSON.stringify(response?.data));
+      //console.log(JSON.stringify(response?.data));
       //console.log(JSON.stringify(response));
-      const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
-      setAuth({ user, pwd, roles, accessToken });
       setUser('');
       setPwd('');
       setSuccess(true);
@@ -46,6 +41,8 @@ const Login = () => {
         setErrMsg('Missing Username or Password');
       } else if (err.response?.status === 401) {
         setErrMsg('Unauthorized');
+      } else if (err.response?.status === 403) {
+        setErrMsg('User does not exist!')
       } else {
         setErrMsg('Login Failed');
       }

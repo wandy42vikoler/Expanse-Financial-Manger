@@ -19,6 +19,7 @@ public class ApplicationConfig {
         http
                 .csrf().disable()
                 .authorizeRequests(lambda -> lambda.anyRequest().permitAll());
+
         return http.build();
     }
 }
