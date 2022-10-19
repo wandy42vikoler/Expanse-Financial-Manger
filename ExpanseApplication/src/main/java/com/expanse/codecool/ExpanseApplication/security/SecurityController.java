@@ -27,14 +27,10 @@ public class SecurityController {
         this.securityUserDetailsService = securityUserDetailsService;
     }
 
-    @GetMapping("/security")
-    public String index() {
-        return "index";
-    }
-
     @PostMapping("/login")
     public String login(@RequestBody Person person, HttpSession session) {
         UserDetails personByUsername = securityUserDetailsService.loadUserByUsername(person.getUsername());
+        personService.passwordVerfication(person.getPassword(), personByUsername);
         session.setAttribute("username", personByUsername.getUsername());
         System.out.println(personByUsername);
         List<Person> people = userRepository.findAll();
