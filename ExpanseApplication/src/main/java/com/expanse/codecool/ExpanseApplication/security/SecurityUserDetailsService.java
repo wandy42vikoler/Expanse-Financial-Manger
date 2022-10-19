@@ -1,12 +1,10 @@
 package com.expanse.codecool.ExpanseApplication.security;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
-import com.expanse.codecool.ExpanseApplication.security.User;
-import com.expanse.codecool.ExpanseApplication.security.UserRepository;
 
 @Service
 public class SecurityUserDetailsService implements UserDetailsService {
@@ -20,11 +18,12 @@ public class SecurityUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-        User user = userRepository.findUserByUsername(username)
+        Person person = userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not present"));
+        UserDetails user = User.withUsername(person.getUsername())
+                .password(person.getPassword())
+                .authorities("USER").build();
+        System.out.println("user:" + user);
         return user;
-    }
-    public void createUser(UserDetails user) {
-        userRepository.save((User) user);
     }
 }

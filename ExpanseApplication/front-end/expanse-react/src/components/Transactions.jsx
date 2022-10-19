@@ -1,31 +1,98 @@
 import "../App.css";
+import React, {useState, useEffect, useContext} from "react";
 import Table from 'react-bootstrap/Table';
+import axios from 'axios';
+import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import TransactionsInputForm from "./InputTransaction/TransactionInput";
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import {appStateContext} from '../store'
+
+
  
 
-function transactionsComponent() {
+function TransactionsComponent() {
+
+    const appState = useContext(appStateContext);
+
+    console.log('appState', appState)
+
+    axios.defaults.baseURL = 'http://localhost:8080';
+  
+
+    useEffect(() => {
+        axios.get('/transaction')
+            .then(response => { 
+                appState.setState(prevState => { //anonymous arrow function
+                    prevState.transactions = response.data;
+                    console.log('rp', response.data);
+                    return {...prevState};
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, [])
+
+    let amountFormatter = Intl.NumberFormat('de-DE', { 
+        style: 'currency', 
+        currency: 'EUR' })
+
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = () => {
+        setOpen(false);
+      };
+
+
+      console.log('appStTRans', appState.transactions)
+
+
+
 
     return (
-        <div className="transaction_card">
+        <div className="transaction_card" style={{overflow: 'scroll'}}>
+            <Box sx={{ '& > :not(style)': { m: 1 } }}>
+                <Fab size="small" color="primary" aria-label="add" style={{float: 'right'}} onClick={handleClickOpen}>
+                    <AddIcon/>
+                </Fab>
+            </Box>
+            <h5 className="card_title_activity">Transactions</h5>
             <Table className="transactions_table">
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Type</th>
-                        <th>Date</th>
-                        <th>Amount</th>
+                        <th className="card_title">Title</th>
+                        <th className="card_title">Type</th>
+                        <th className="card_title">Date</th>
+                        <th className="card_title">Amount</th>
                     </tr>
                 </thead>
                 <tbody>
+                {appState.transactions.map(item => (
                     <tr>
-                        <td>Codecool</td>
-                        <td>Education</td>
-                        <td>12-12-2012</td>
-                        <td>2,000 $</td>
+                        <td key={item.transactionId}>{item.title}</td>
+                        <td key={item.transactionId}>{item.category}</td>
+                        <td key={item.transactionId}>{item.date}</td>
+                        <td key={item.transactionId}>{amountFormatter.format(item.amount)}</td>
                     </tr>
+                ))}
                 </tbody>
             </Table>
+            <Dialog open={open} onClose={handleClose} sx={{width: '1500px'}}>
+                <DialogTitle sx={{marginBottom: '5px'}}>Add Transaction: </DialogTitle>
+                <DialogContent fullWidth maxWidth="xl">
+                    <TransactionsInputForm onClose={handleClose}/>   
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }
 
-export default transactionsComponent;
+export default TransactionsComponent;

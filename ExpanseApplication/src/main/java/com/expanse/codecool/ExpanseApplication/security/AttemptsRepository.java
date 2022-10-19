@@ -1,4 +1,4 @@
-package com.expanse.codecool.ExpanseApplication.security;
+/*package com.expanse.codecool.ExpanseApplication.security;
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,3 +9,4 @@ import com.expanse.codecool.ExpanseApplication.security.Attempts;
 public interface AttemptsRepository extends JpaRepository<Attempts, Integer> {
     Optional<Attempts> findAttemptsByUsername(String username);
 }
+*/

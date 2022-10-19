@@ -7,9 +7,7 @@ function activityComponent() {
     return (
 
         <div className="charts_card">
-                <div>
-                <BarChart />
-                </div>
+            <BarChart/>
         </div>
     );
 }
