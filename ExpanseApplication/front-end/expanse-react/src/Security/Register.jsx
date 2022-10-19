@@ -3,6 +3,75 @@ import "./security.css";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from './axios';
+import BackgroundImage from '../assets/registerbackground.jpg';
+
+
+const backgroundStyle = {
+  backgroundImage: `url(${BackgroundImage})`,  
+  height: '100vh',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover'
+}
+
+const registrationBoxStyle = {
+  width: '446px',
+  background: '#FFFFFF',
+  borderRadius: '15px',
+  display: 'block',
+  flexDirection: 'row',
+  alignItems: 'flex-start',
+  padding: '48px',
+  gap: '8px',
+  height: '480px',
+  margin: 'auto',
+  position: 'relative',
+  top: '10%',
+  overflow: 'hidden'
+}
+
+const titleStyle = {
+  fontFamily: 'Open Sans',
+  fontStyle: 'normal',
+  fontWeight: '600',
+  fontSize: '30px',
+  lineHeight: '137%',
+  textAlign: 'center',
+  letterSpacing: '-0.8px',
+  color: '#172B4D',
+}
+
+const inputFieldStyle = {
+  fontFamily: 'Open Sans',
+  padding: '0px 0px 0px 14px',
+  height: '50px',
+  borderRadius: '8px',
+  border: '1px solid #E2E8F0',
+  fontWeight: '400',
+  fontSize: '16px',
+  lineHeight: '150%',
+  color: '#A0AEC0'
+}
+
+const buttonStyle = {
+  fontFamily: 'Open Sans',
+  padding: '6px 16px',
+  background: '#3E79E5',
+  borderRadius: '8px',
+  marginTop: '30px',
+  color: '#FFFF',
+  border: '0px',
+  fontWeight: 500,
+  fontSize: '18px'
+}
+
+const messageBoxStyling = {
+  fontFamily: 'Open Sans',
+  backgroundColor: '#FFFF',
+  color: '#8392AB',
+  fontSize: '15px'
+}
+
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -81,7 +150,7 @@ const Register = () => {
   }
 
   return (
-    <>
+    <div style={backgroundStyle}>
       {success ? (
         <section>
           <h1>Success!</h1>
@@ -90,12 +159,11 @@ const Register = () => {
           </p>
         </section>
       ) : (
-        <section>
+        <section style={registrationBoxStyle}>
           <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-          <h1>Register</h1>
+          <h1 style={titleStyle}>Register</h1>
           <form onSubmit={handleSubmit}>
             <label htmlFor="username">
-              Username:
               <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
               <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
             </label>
@@ -111,8 +179,11 @@ const Register = () => {
               aria-describedby="uidnote"
               onFocus={() => setUserFocus(true)}
               onBlur={() => setUserFocus(false)}
+              placeholder="Username"
+              style={inputFieldStyle}
+              placeholderColor='#A0AEC0'
             />
-            <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
+            <p style={messageBoxStyling} id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
               <FontAwesomeIcon icon={faInfoCircle} />
               4 to 24 characters.<br />
               Must begin with a letter.<br />
@@ -121,7 +192,6 @@ const Register = () => {
 
 
             <label htmlFor="password">
-              Password:
               <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
               <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} />
             </label>
@@ -135,8 +205,10 @@ const Register = () => {
               aria-describedby="pwdnote"
               onFocus={() => setPwdFocus(true)}
               onBlur={() => setPwdFocus(false)}
+              placeholder="Password"
+              style={inputFieldStyle}
             />
-            <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
+            <p style={messageBoxStyling} id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
               <FontAwesomeIcon icon={faInfoCircle} />
               8 to 24 characters.<br />
               Must include uppercase and lowercase letters, a number and a special character.<br />
@@ -145,7 +217,6 @@ const Register = () => {
 
 
             <label htmlFor="confirm_pwd">
-              Confirm Password:
               <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
               <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />
             </label>
@@ -159,23 +230,25 @@ const Register = () => {
               aria-describedby="confirmnote"
               onFocus={() => setMatchFocus(true)}
               onBlur={() => setMatchFocus(false)}
+              placeholder="Confirm Password"
+              style={inputFieldStyle}
             />
-            <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
+            <p style={messageBoxStyling} id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
               <FontAwesomeIcon icon={faInfoCircle} />
               Must match the first password input field.
             </p>
 
-            <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
+            <button style={buttonStyle} disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
           </form>
-          <p>
-            Already registered?<br />
+          <p style={{fontFamily: 'Open Sans', fontSize: '14px', fontWeight: 400, textAlign: 'center'}}>
+            Already have an account?   
             <span className="line">
-              <a href="./login">Sign In</a>
+              <a style={{ fontFamily: 'Open Sans', color: '#5E72E4', textDecoration: 'none', fontWeight: 600, fontSize: '16px', paddingLeft: '10px'}} href="./login">   Sign In</a>
             </span>
           </p>
         </section>
       )}
-    </>
+      </div>
   )
 }
 
